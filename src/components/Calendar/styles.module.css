@@ -1,0 +1,84 @@
+
+.calendar {
+  width:360px;
+  height: calc(100vh - 2px);
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  height: 30px;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 50px 50px;
+  border-bottom: 1px solid gray ;
+}
+
+.topText {
+  margin: auto 0;
+}
+
+.topButton {
+  border:none;
+  background: none;
+  margin:0;
+  height: 30px;
+}
+
+.calendarYearly {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  /*height: 250px;*/
+  flex:1;
+  list-style: none;
+}
+
+.calendarQuarterly {
+  flex:1;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.calendarMonthly {
+  flex:1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.quarter {
+  width:100%;
+  display: grid;
+  grid-template-columns: 30px 1fr 1fr 1fr;
+}
+
+.year,
+.month{
+  text-align: center;
+  margin: 0;
+  padding:16px 0;
+}
+
+.year:hover,
+.month:hover,
+.quarter:hover .month {
+  /*font-weight: bold;*/
+  color:blue;
+  background: cyan;
+}
+
+.year.selected,
+.month.selected,
+.quarter:hover .quarterNo {
+  color:white;
+  background: blue;
+}
+
+.quarterNo {
+  background: cyan;
+  padding:5px;
+}
+

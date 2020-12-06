@@ -1,0 +1,18 @@
+.eventList{
+  width:720px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.inputs {
+  flex:2;
+  display: flex;
+  flex-direction: column;
+}
+
+.displayList {
+  flex:3;
+  display: flex;
+  flex-direction: column;
+}
