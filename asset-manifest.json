@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "//edwartexe.github.io/koombea-react-training/static/css/main.c3ab3c9f.chunk.css",
+    "main.js": "//edwartexe.github.io/koombea-react-training/static/js/main.128e8bfa.chunk.js",
+    "main.js.map": "//edwartexe.github.io/koombea-react-training/static/js/main.128e8bfa.chunk.js.map",
+    "runtime-main.js": "//edwartexe.github.io/koombea-react-training/static/js/runtime-main.1f845402.js",
+    "runtime-main.js.map": "//edwartexe.github.io/koombea-react-training/static/js/runtime-main.1f845402.js.map",
+    "static/js/2.fa605289.chunk.js": "//edwartexe.github.io/koombea-react-training/static/js/2.fa605289.chunk.js",
+    "static/js/2.fa605289.chunk.js.map": "//edwartexe.github.io/koombea-react-training/static/js/2.fa605289.chunk.js.map",
+    "static/js/3.7029f257.chunk.js": "//edwartexe.github.io/koombea-react-training/static/js/3.7029f257.chunk.js",
+    "static/js/3.7029f257.chunk.js.map": "//edwartexe.github.io/koombea-react-training/static/js/3.7029f257.chunk.js.map",
+    "index.html": "//edwartexe.github.io/koombea-react-training/index.html",
+    "static/css/main.c3ab3c9f.chunk.css.map": "//edwartexe.github.io/koombea-react-training/static/css/main.c3ab3c9f.chunk.css.map",
+    "static/js/2.fa605289.chunk.js.LICENSE.txt": "//edwartexe.github.io/koombea-react-training/static/js/2.fa605289.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1f845402.js",
+    "static/js/2.fa605289.chunk.js",
+    "static/css/main.c3ab3c9f.chunk.css",
+    "static/js/main.128e8bfa.chunk.js"
+  ]
+}
