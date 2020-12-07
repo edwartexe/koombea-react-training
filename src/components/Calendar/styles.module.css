@@ -1,6 +1,7 @@
 
 .calendar {
-  width:360px;
+  flex:1;
+  /*width:360px;*/
   height: calc(100vh - 2px);
   border: 1px solid black;
   display: flex;
@@ -8,8 +9,8 @@
 }
 
 .topBar {
-  height: 30px;
-  padding: 0 10px;
+  height: 25px;
+  padding: 5px 10px;
   display: grid;
   grid-template-columns: 1fr 50px 50px;
   border-bottom: 1px solid gray ;
@@ -56,7 +57,7 @@
 }
 
 .year,
-.month{
+.month {
   text-align: center;
   margin: 0;
   padding:16px 0;
@@ -72,7 +73,9 @@
 
 .year.selected,
 .month.selected,
-.quarter:hover .quarterNo {
+.quarter.selected .quarterNo,
+.quarter:hover .quarterNo,
+.quarter.selected .month {
   color:white;
   background: blue;
 }
@@ -80,5 +83,11 @@
 .quarterNo {
   background: cyan;
   padding:5px;
+  border-right:1px solid cyan;
+}
+
+
+.quarter.selected .quarterNo {
+  border-right:1px solid white;
 }
 
