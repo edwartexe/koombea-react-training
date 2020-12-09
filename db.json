@@ -1,0 +1,30 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Introductions",
+      "location": "Online Event",
+      "host": "Koombea",
+      "type": "Public",
+      "date": "2020-11-1",
+      "tags": "meeting",
+      "description": "team introduction"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "eduardo",
+      "last_name": "ramirez",
+      "avatar": "avatar.jpg",
+      "birthday": "1995-4-2"
+     }
+  ],
+  "favoriteEvents": [
+    {
+      "id": 1,
+      "user_id": "eduardo",
+      "event_id": "ramirez"
+     }
+  ]
+}
