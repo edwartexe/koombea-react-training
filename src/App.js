@@ -17,10 +17,16 @@ const generatorEventList = (size=3) => {
   return eventList;
 }
 
+const getEventList = async () => {
+  const response = await fetch('http://localhost:3000/events')
+  await new Promise(r => setTimeout(r, 1000)) // wait a second
+  return response.json()
+};
+
 class App extends Component {
   state ={
-    eventList: generatorEventList(12),
-    startDate: new Date("2018-1-1"),
+    eventList: getEventList(),
+    startDate: new Date("2018-1-2"),
     endDate: new Date("2022-12-31"),
     yearLowerLimit:2018,
     yearAmmountLimit:5,
