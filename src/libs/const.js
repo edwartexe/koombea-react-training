@@ -1,0 +1,1 @@
+export const monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Agu", "Sept", "Oct", "Nov", "Dec"];

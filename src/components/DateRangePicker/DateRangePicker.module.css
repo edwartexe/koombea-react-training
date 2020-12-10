@@ -1,6 +1,5 @@
 .layout {
   flex:1;
-  /*width:240px;*/
   display: flex;
   flex-direction: column;
   background: #eee;
