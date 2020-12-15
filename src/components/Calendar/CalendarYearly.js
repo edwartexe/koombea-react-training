@@ -1,6 +1,7 @@
 import cx from "classnames";
 import styles from "./styles.module.css";
 
+
 const yearsArray = (start, ammount, onClick, year, selectAll) => {
   return Array(ammount)
     .fill()

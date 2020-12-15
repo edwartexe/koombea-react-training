@@ -15,9 +15,21 @@ const quartArray = (onClick, month1, month2) => {
           onClick={() => onClick(3 * index, 3 * index + 2)}
         >
           <div className={styles.quarterNo}> Q{index + 1} </div>
-          <div className={styles.month}> {monthName[3 * index]} </div>
-          <div className={styles.month}> {monthName[3 * index + 1]} </div>
-          <div className={styles.month}> {monthName[3 * index + 2]} </div>
+          <div className={styles.month}>
+            <p className={styles.monthText}>
+              {monthName[3 * index]} 
+            </p>
+          </div>
+          <div className={styles.month}>
+            <p className={styles.monthText}>
+              {monthName[3 * index + 1]} 
+            </p>
+          </div>
+          <div className={styles.month}>
+            <p className={styles.monthText}>
+              {monthName[3 * index + 2]} 
+            </p>
+          </div>
         </div>
       );
     });

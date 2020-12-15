@@ -4,27 +4,73 @@
       "id": 1,
       "name": "Introductions",
       "location": "Online Event",
-      "host": "Koombea",
-      "type": "Public",
+      "hostname": "Koombea",
+      "type": "Private",
       "date": "2020-11-1",
       "tags": "meeting",
       "description": "team introduction"
+    },
+    {
+      "id": 2,
+      "name": "Game Awards",
+      "location": "Online Event",
+      "hostname": "Keanu Reves",
+      "type": "Public",
+      "date": "2020-12-10",
+      "tags": "games",
+      "description": "gaming show"
+    },
+    {
+      "name": "meteor shower",
+      "location": "anywhere",
+      "hostname": "the sky",
+      "type": "Public",
+      "date": "2020-12-13T05:00:00.000Z",
+      "tags": "space",
+      "description": "watch the meteor shower",
+      "id": 3
+    },
+    {
+      "name": "christmas",
+      "location": "round the world",
+      "hostname": "You",
+      "type": "Public",
+      "date": "2020-12-24T05:00:00.000Z",
+      "tags": "xmas christmas",
+      "description": "Celebrate the arrival of sandy claws",
+      "id": 4
     }
   ],
   "users": [
     {
       "id": 1,
+      "username": "ed",
+      "pass": "yes",
       "name": "eduardo",
-      "last_name": "ramirez",
+      "lastName": "ramirez",
       "avatar": "avatar.jpg",
       "birthday": "1995-4-2"
-     }
+    },
+    {
+      "username": "q",
+      "pass": "q",
+      "name": "q",
+      "lastName": "q",
+      "birthday": "2020-12-13T05:00:00.000Z",
+      "avatar": "",
+      "id": 2
+    }
   ],
   "favoriteEvents": [
     {
-      "id": 1,
-      "user_id": "eduardo",
-      "event_id": "ramirez"
-     }
+      "user_id": 1,
+      "event_id": 2,
+      "id": 4
+    },
+    {
+      "user_id": 1,
+      "event_id": 4,
+      "id": 5
+    }
   ]
 }

@@ -1,0 +1,42 @@
+.Window {
+  display: flex;
+  justify-content: center;
+  flex:1;
+}
+
+.form {
+  width: 240px;
+  min-height: 240px;
+  padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  border-radius: 25px;
+  background: #ccc;
+}
+
+.title {
+  font-size: 24px ;
+  text-align: center;
+}
+
+.inputLabel {
+  display: none;
+}
+
+.input {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #fff;
+  border: 1px solid #999;
+  margin-bottom:5px;
+}
+
+.submit {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #4f4;
+  border: 1px solid #393;
+  margin-top: 20px;
+}

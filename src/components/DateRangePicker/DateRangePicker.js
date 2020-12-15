@@ -1,10 +1,10 @@
 import styles from "./DateRangePicker.module.css";
 
 const DateRangePicker = (props) => (
+<div className={styles.wrapper}>
   <div className={styles.layout}>
     <h2>Select Timeframe</h2>
-
-    <label for="period1">
+    <label htmlFor="period1">
       <input
         type="radio"
         id="period1"
@@ -14,7 +14,7 @@ const DateRangePicker = (props) => (
       Yearly
     </label>
 
-    <label for="period2">
+    <label htmlFor="period2">
       <input
         type="radio"
         id="period2"
@@ -24,7 +24,7 @@ const DateRangePicker = (props) => (
       Quarterly
     </label>
 
-    <label for="period3">
+    <label htmlFor="period3">
       <input
         type="radio"
         id="period3"
@@ -34,7 +34,7 @@ const DateRangePicker = (props) => (
       Monthly
     </label>
 
-    <label for="selectAll">
+    <label htmlFor="selectAll">
       <input
         type="checkbox"
         id="selectAll"
@@ -64,7 +64,10 @@ const DateRangePicker = (props) => (
           props.dateEnd.getDate()}
       </p>
     </div>
+
   </div>
+  {props.children}
+</div>
 );
 
 export default DateRangePicker;

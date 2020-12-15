@@ -1,0 +1,58 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+}
+
+.navBar {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  justify-content: flex-end;
+  margin-left: auto;
+  order: 2;
+}
+
+.navUser {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: auto;
+  order: 1;
+  padding:5px;
+  margin:0;
+}
+
+.navTitle {
+  display:none;
+}
+
+.navButton,
+.navLogout,
+.navLogin {
+  border-left:1px solid black;
+  padding: 5px 10px ;
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background: #ccc;
+}
+
+.navLogout {
+  background:#fcc;
+}
+
+.navLogout:hover {
+  background:#f44;
+}
+
+.navLogin {
+  background:#cfc;
+}
+
+.navLogin:hover {
+  background:#4f4;
+}

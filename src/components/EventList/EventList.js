@@ -1,100 +1,108 @@
 import { Component } from "react";
 import styles from "./EventList.module.css";
+import EventElement from "./EventElement/EventElement";
 
 class EventList extends Component {
   state = {
     eventName: "",
     hostName: "",
     eventType: "Any",
+    favFilter: false
   };
 
-  setStateName = (val) => {
-    this.setState({ eventName: val });
-  };
-  setStateHost = (val) => {
-    this.setState({ hostName: val });
-  };
-  setStateType = (val) => {
-    this.setState({ eventType: val });
-  };
+  setStateGeneric = (type, val) => {
+    this.setState({[type]: val});
+  }
 
   eventArray = () => {
-    let eventList = this.props.eventList;
-    let date1 = this.props.dateStart;
-    let date2 = this.props.dateEnd;
-
-    let eventCards = eventList.map((elem, index) => {
-      if (date1 <= elem.date && elem.date <= date2) {
-        if (
+    let eventCards = this.props.eventList.map( 
+      (elem) => {
+      if (
+        (
+          this.props.dateStart <= elem.date &&
+          elem.date <= this.props.dateEnd
+        )
+        && (
           elem.name
             .toLowerCase()
             .includes(this.state.eventName.toLowerCase()) &&
           elem.hostname
             .toLowerCase()
             .includes(this.state.hostName.toLowerCase())
-        ) {
-          if (
-            this.state.eventType === "Any" ||
-            elem.type === this.state.eventType
-          ) {
-            return (
-              <li key={index} className={styles.event}>
-                <p className={styles.eventTitle}> {elem.name} </p>
-                <p className={styles.eventHost}> Set by: {elem.hostname} </p>
-                <p className={styles.eventLoc}>
-                  {" "}
-                  {elem.location + " (" + elem.type + ")"}{" "}
-                </p>
-                <p className={styles.eventDate}>
-                  {" "}
-                  {elem.date.getFullYear() +
-                    "-" +
-                    elem.date.getMonth() +
-                    "-" +
-                    elem.date.getDate()}
-                </p>
-              </li>
-            );
-          }
-        }
-      }
+        ) 
+        && (
+          this.state.eventType === "Any" ||
+          elem.type === this.state.eventType
+        ) 
+        && (
+          (this.state.favFilter && elem.isFav) || 
+          !this.state.favFilter
+        ) 
+        ){
+          return (
+            <EventElement 
+              elem={elem}
+              userID={this.props.userID}
+              setFav={this.props.setFav}
+            />
+          );
+      }      
     });
     return eventCards;
   };
+
+
+
+
 
   render() {
     return (
       <div className={styles.eventList}>
         <div className={styles.inputRow}>
-          <label className={styles.input} for="name">
+          <label className={styles.input} htmlFor="name">
             Event Name:
             <input
               type="text"
               id="name"
-              onChange={(e) => this.setStateName(e.target.value)}
+              onChange={(e) => this.setStateGeneric("eventName", e.target.value)}
             />
           </label>
 
-          <label className={styles.input} for="hostname">
+          <label className={styles.input} htmlFor="hostname">
             Host Name:
             <input
               type="text"
               id="hostname"
-              onChange={(e) => this.setStateHost(e.target.value)}
+              onChange={(e) => this.setStateGeneric("hostName", e.target.value)}
             />
           </label>
 
-          <label className={styles.input} for="eventtype">
+          <label className={styles.input} htmlFor="eventtype">
             Event Type:
             <select
               id="eventtype"
-              onChange={(e) => this.setStateType(e.target.value)}
+              onChange={(e) => this.setStateGeneric("eventType", e.target.value)}
             >
               <option value="Any">Any</option>
               <option value="Private">Private</option>
               <option value="Public">Public</option>
             </select>
           </label>
+
+          {this.props.userID!==0? 
+            <label htmlFor="favFilter">
+              Solo Favoritos:
+              <input
+                type="checkbox"
+                id="favFilter"
+                name="favFilter"
+                checked={this.props.favFilter}
+                onChange={(e) => this.setStateGeneric("favFilter", e.target.checked)}
+              />
+            </label>
+          :
+            null
+          }
         </div>
 
         <ul className={styles.displayList}>{this.eventArray()}</ul>

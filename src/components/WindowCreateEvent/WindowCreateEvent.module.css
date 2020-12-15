@@ -1,0 +1,54 @@
+.Window {
+  display: flex;
+  justify-content: center;
+  flex:1;
+}
+
+.form {
+  width: 240px;
+  padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  border-radius: 25px;
+  background: #ccc;
+}
+
+.title {
+  font-size: 24px ;
+  text-align: center;
+}
+
+.dateText {
+  text-align: center;
+}
+
+.errorMessage {
+  font-size:10px;
+  text-align: center;
+  color:red;
+}
+
+.inputLabel {
+  color:#222;
+  font-size: 12px;
+  margin: 5px auto 1px 12px;
+}
+
+.input {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #fff;
+  border: 1px solid #999;
+  margin-bottom:5px;
+  width: -webkit-fill-available;
+}
+
+.submit {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #4f4;
+  border: 1px solid #393;
+  margin-top: 20px;
+}
