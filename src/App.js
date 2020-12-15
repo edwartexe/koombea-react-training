@@ -7,6 +7,12 @@ import WindowLogin from "./components/WindowLogIn/WindowLogin";
 import WindowRegister from "./components/WindowRegister/WindowRegister";
 import { useQuery } from "react-query";
 
+const getEventList = async () => {
+  const response = await fetch('http://localhost:3000/events')
+  await new Promise(r => setTimeout(r, 1000)) // wait a second
+  return response.json()
+};
+
 class App extends Component {
   state = {
     username: "",
