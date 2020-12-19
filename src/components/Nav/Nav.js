@@ -1,10 +1,28 @@
 import styles from "./Nav.module.css";
+import { Link } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 
-const Nav = (props) => (
+import {AuthContext} from "../Context/Auth";
+import { useContext } from 'react';
+
+function Nav (props) {
+  let history = useHistory();
+  const {session, setSession} = useContext(AuthContext)
+
+  const logoutAccount = () => {
+    setSession({ 
+      username: "", 
+      id: 0
+    });
+    localStorage.removeItem("rememberSessionID");
+    history.push({pathname:  "/Login"})
+  };
+
+  return (
     <nav className={styles.nav}> 
       
       <h1 className={styles.navUser}>
-        {(props.username !== "")? "Welcome, "+props.username: ""}
+        {(session.username !== "")? "Welcome, "+session.username: ""}
       </h1>
     
       <ul className={styles.navBar}>
@@ -13,24 +31,22 @@ const Nav = (props) => (
         <li 
           key={1} 
           className={styles.navButton} 
-          onClick={() => props.setWindow("List")} 
         >  
-          Event List  
+          <Link to="/List"  className={styles.navLink}>Event List</Link>
         </li>
 
-        {(props.username !== "")? 
+        {(session.username !== "")? 
           [
           <li 
             key={3} 
             className={styles.navButton} 
-            onClick={() => props.setWindow("Create")} 
           >  
-            NEW event  
+          <Link to="/Create"  className={styles.navLink}>NEW event</Link>
           </li>,
           <li 
             key={0} 
             className={styles.navLogout} 
-            onClick={() => props.logout()} 
+            onClick={logoutAccount} 
           >  
             Logout 
           </li>
@@ -40,16 +56,14 @@ const Nav = (props) => (
           <li 
             key={2} 
             className={styles.navButton} 
-            onClick={() => props.setWindow("Register")} 
           >  
-            Sign Up  
+            <Link to="/Register" className={styles.navLink}>Sign Up</Link>
           </li>,
           <li 
             key={0} 
             className={styles.navLogin} 
-            onClick={() => props.setWindow("Login")} 
           >  
-            Login 
+            <Link to="/Login" className={styles.navLink}>Login</Link>
           </li>
           ]
         }
@@ -57,6 +71,8 @@ const Nav = (props) => (
       </ul>
     </nav>
 
-);
+  );
+}
+
 
 export default Nav;

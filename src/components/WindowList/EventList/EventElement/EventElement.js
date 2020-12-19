@@ -1,7 +1,7 @@
 
 import styles from "./EventElement.module.css";
-import starF from "../../../assets/star_f.png";
-import starE from "../../../assets/star_e.png";
+import starF from "../../../../assets/star_f.png";
+import starE from "../../../../assets/star_e.png";
 
 const EventElement = (props) => (
   <li key={props.elem.id} className={styles.event}>

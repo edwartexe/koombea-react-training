@@ -39,6 +39,66 @@
       "tags": "xmas christmas",
       "description": "Celebrate the arrival of sandy claws",
       "id": 4
+    },
+    {
+      "name": "MH Rise",
+      "location": "Online Event",
+      "hostname": "Capcom",
+      "type": "Public",
+      "date": "2021-03-26T05:00:00.000Z",
+      "tags": "monster hunter",
+      "description": "time to go for the oil",
+      "id": 5
+    },
+    {
+      "name": "carnaval",
+      "location": "barranquilla",
+      "hostname": "barranquilla",
+      "type": "Public",
+      "date": "2021-02-14T05:00:00.000Z",
+      "tags": "carnaval",
+      "description": "carnaval",
+      "id": 6
+    },
+    {
+      "name": "test",
+      "location": "test",
+      "hostname": "tes",
+      "type": "Private",
+      "date": "2021-03-17T05:00:00.000Z",
+      "tags": "test",
+      "description": "ttttt",
+      "id": 7
+    },
+    {
+      "name": "uuu",
+      "location": "uuuuu",
+      "hostname": "uuuuuuu",
+      "type": "Private",
+      "date": "2021-05-20T05:00:00.000Z",
+      "tags": "uuuuuuu",
+      "description": "uuuuuuuuuu",
+      "id": 8
+    },
+    {
+      "name": "qq",
+      "location": "qq",
+      "hostname": "qq",
+      "type": "Public",
+      "date": "2021-05-26T05:00:00.000Z",
+      "tags": "qq",
+      "description": "qq",
+      "id": 9
+    },
+    {
+      "name": "nn",
+      "location": "nn",
+      "hostname": "nn",
+      "type": "Private",
+      "date": "2023-04-19T05:00:00.000Z",
+      "tags": "nn",
+      "description": "nn",
+      "id": 10
     }
   ],
   "users": [
@@ -59,18 +119,76 @@
       "birthday": "2020-12-13T05:00:00.000Z",
       "avatar": "",
       "id": 2
+    },
+    {
+      "username": "hh",
+      "pass": "hh",
+      "passCon": "hh",
+      "name": "hh",
+      "lastName": "hh",
+      "avatar": "",
+      "birthday": "2020-12-30T05:00:00.000Z",
+      "id": 3
+    },
+    {
+      "username": "kk",
+      "pass": "hh",
+      "passCon": "hh",
+      "name": "hh",
+      "lastName": "hh",
+      "avatar": "",
+      "birthday": "2020-12-30T05:00:00.000Z",
+      "id": 4
+    },
+    {
+      "username": "ll",
+      "pass": "ll",
+      "passCon": "ll",
+      "name": "ll",
+      "lastName": "ll",
+      "avatar": "",
+      "birthday": "2020-12-24T05:00:00.000Z",
+      "id": 5
     }
   ],
   "favoriteEvents": [
     {
       "user_id": 1,
-      "event_id": 2,
-      "id": 4
+      "event_id": 4,
+      "id": 5
     },
     {
       "user_id": 1,
-      "event_id": 4,
-      "id": 5
+      "event_id": 5,
+      "id": 9
+    },
+    {
+      "user_id": 2,
+      "event_id": 2,
+      "id": 12
+    },
+    {
+      "user_id": 1,
+      "event_id": 1,
+      "id": 13
+    },
+    {
+      "event_id": 1,
+      "id": 14
+    },
+    {
+      "event_id": 2,
+      "id": 15
+    },
+    {
+      "user_id": 1,
+      "event_id": 3,
+      "id": 17
+    },
+    {
+      "user_id": 2,
+      "event_id": 9,
+      "id": 19
     }
   ]
 }

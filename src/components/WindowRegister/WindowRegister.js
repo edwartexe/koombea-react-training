@@ -1,13 +1,28 @@
-import { Component } from "react";
 import styles from "./WindowRegister.module.css";
+import { server } from "../../libs/const";
 
-import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { Formik, Form, Field, useField, useFormikContext } from "formik";
 
 import * as Yup from "yup";
+
+import {useHistory } from "react-router-dom";
+
+import { useMutation } from "react-query";
+
+const createUser = async (newUsr)=> {
+  console.log("createUser");
+  console.log(newUsr);
+  const res = await fetch(server+"users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json",  },
+        body: JSON.stringify({ ...newUsr }),
+      });
+  const {resres} = await res.json();
+  return resres;
+}
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -34,9 +49,12 @@ const SignupSchema = Yup.object().shape({
   birthday: Yup.date().required("Required"),
 });
 
+
+
 const Bday = ({ ...props }) => {
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
+
   return (
     <DatePicker
       {...field}
@@ -55,38 +73,32 @@ const Bday = ({ ...props }) => {
   );
 };
 
-class WindowRegister extends Component {
-  submitForm = (values) => {
+
+
+function WindowRegister (props) {
+  let history = useHistory();
+
+  const [insertUsr] = useMutation(createUser, {
+    onSuccess: ()=>{
+      history.push("/Login")
+    }
+  });
+
+
+  const submitForm = (values) => {
+    console.log("values");
+    console.log(values);
     if (values.pass !== values.passCon) {
       alert("The password and its confirmation must be the same");
       return;
     }
 
-    fetch(
-      `http://localhost:5000/users?username=${encodeURIComponent(
-        values.username
-      )}`
-    )
+    fetch( `${server}users?username=${encodeURIComponent( values.username )}`  )
       .then((res) => res.json())
       .then(
         (result) => {
           if (result.length === 0) {
-            fetch("http://localhost:5000/users", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                username: values.username,
-                pass: values.pass,
-                name: values.name,
-                lastName: values.lastName,
-                birthday: values.birthday,
-                avatar: "",
-              }),
-            })
-              .then(alert("Ha sido Registrado"))
-              .then(this.props.setWindow("Login"));
+            insertUsr(values);
           } else {
             alert("That username already exists");
           }
@@ -97,7 +109,7 @@ class WindowRegister extends Component {
       );
   };
 
-  render() {
+  
     return (
       <div className={styles.Window}>
         <Formik
@@ -113,7 +125,7 @@ class WindowRegister extends Component {
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              this.submitForm(values);
+              submitForm(values);
               setSubmitting(false);
             }, 400);
           }}
@@ -207,14 +219,12 @@ class WindowRegister extends Component {
               >
                 Register
               </button>
-
-              <p>{this.props.regMsg}</p>
             </Form>
           )}
         </Formik>
       </div>
     );
-  }
+  
 }
 
 export default WindowRegister;

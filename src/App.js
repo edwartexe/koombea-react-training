@@ -1,108 +1,44 @@
-import { Component } from "react";
 import styles from "./App.module.css";
 import Nav from "./components/Nav/Nav";
 import WindowList from "./components/WindowList/WindowList";
 import WindowCreate from "./components/WindowCreateEvent/WindowCreateEvent";
 import WindowLogin from "./components/WindowLogIn/WindowLogin";
 import WindowRegister from "./components/WindowRegister/WindowRegister";
-import { useQuery } from "react-query";
 
-const getEventList = async () => {
-  const response = await fetch('http://localhost:3000/events')
-  await new Promise(r => setTimeout(r, 1000)) // wait a second
-  return response.json()
-};
+import MyProvider from "./components/Context/Auth";
 
-class App extends Component {
-  state = {
-    username: "",
-    userID: 0,
-    window: "",
-    responceMsg: "",
-  };
+import {ReactQueryDevtools} from "react-query-devtools";
 
-  setAccount = (usr, pas) => {
-    this.setState({ loading: true }, () => {
-      fetch(
-        `http://localhost:5000/users?username=${encodeURIComponent(
-          usr
-        )}&pass=${encodeURIComponent(pas)}`
-      )
-        .then((res) => res.json())
-        .then((result) => {
-          if (result.length > 0) {
-            return this.setState({
-              username: result[0].username,
-              userID: result[0].id,
-              window: "List",
-              responceMsg: "",
-            });
-          } else {
-            return this.setState({
-              responceMsg: "Incorrect Username or Password",
-            });
-          }
-        })
-        .catch(console.log);
-    });
-  };
+import {  BrowserRouter, Switch, Route } from "react-router-dom";
 
-  logoutAccount = () => {
-    this.setState({ username: "", userID: 0, window: "Login" });
-  };
 
-  setStateWindow = (val) => {
-    this.setState({ window: val });
-  };
+function App () {
 
-  selectedWindow = (window) => {
-    switch (window) {
-      case "List":
-        return (
-          <WindowList
-            username={this.state.username}
-            userID={this.state.userID}
-          />
-        );
-      case "Create":
-        return (
-          <WindowCreate
-            username={this.state.username}
-            regMsg={this.state.responceMsg}
-            setWindow={this.setStateWindow}
-          />
-        );
-      case "Register":
-        return (
-          <WindowRegister
-            username={this.state.username}
-            regMsg={this.state.responceMsg}
-            setWindow={this.setStateWindow}
-          />
-        );
-      default:
-        return (
-          <WindowLogin
-            username={this.state.username}
-            login={this.setAccount}
-            loginMsg={this.state.responceMsg}
-          />
-        );
-    }
-  };
+  return (
+    <MyProvider>
+      <BrowserRouter>
+        <div className={styles.App}>
+          <Nav />
+          <Switch>
+              <Route path="/Create">
+                <WindowCreate />
+              </Route>
+              <Route path="/Register">
+                <WindowRegister  />
+              </Route>
+              <Route path="/Login">
+                <WindowLogin />
+              </Route>
+              <Route path="/">
+                <WindowList />
+              </Route>
+            </Switch>
+          </div>
 
-  render() {
-    return (
-      <div className={styles.App}>
-        <Nav
-          username={this.state.username}
-          setWindow={this.setStateWindow}
-          logout={this.logoutAccount}
-        />
-        {this.selectedWindow(this.state.window)}
-      </div>
-    );
-  }
+          <ReactQueryDevtools initialISOpen={false}/>
+      </BrowserRouter>
+    </MyProvider>
+  );
 }
 
 export default App;

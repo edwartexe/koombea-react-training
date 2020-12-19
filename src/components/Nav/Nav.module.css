@@ -33,8 +33,14 @@
 .navLogout,
 .navLogin {
   border-left:1px solid black;
-  padding: 5px 10px ;
   cursor: pointer;
+  display: flex;
+}
+
+.navLink {
+  color: inherit;
+  text-decoration: inherit;
+  padding: 5px 10px ;
 }
 
 .navButton:hover {
@@ -43,6 +49,7 @@
 
 .navLogout {
   background:#fcc;
+  padding: 5px 10px ;
 }
 
 .navLogout:hover {
@@ -56,3 +63,4 @@
 .navLogin:hover {
   background:#4f4;
 }
+
