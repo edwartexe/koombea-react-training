@@ -2,18 +2,15 @@ import styles from "./Nav.module.css";
 import { Link } from "react-router-dom";
 import {useHistory } from "react-router-dom";
 
-import {AuthContext} from "../Context/Auth";
+import {AuthContext} from "../../Context/Auth";
 import { useContext } from 'react';
 
 function Nav (props) {
   let history = useHistory();
-  const {session, setSession} = useContext(AuthContext)
+  const {session, setSession} = useContext(AuthContext);
 
   const logoutAccount = () => {
-    setSession({ 
-      username: "", 
-      id: 0
-    });
+    setSession(null);
     localStorage.removeItem("rememberSessionID");
     history.push({pathname:  "/Login"})
   };
@@ -22,7 +19,7 @@ function Nav (props) {
     <nav className={styles.nav}> 
       
       <h1 className={styles.navUser}>
-        {(session.username !== "")? "Welcome, "+session.username: ""}
+        {session? "Welcome, "+session.username: ""}
       </h1>
     
       <ul className={styles.navBar}>
@@ -35,7 +32,7 @@ function Nav (props) {
           <Link to="/List"  className={styles.navLink}>Event List</Link>
         </li>
 
-        {(session.username !== "")? 
+        {session? 
           [
           <li 
             key={3} 

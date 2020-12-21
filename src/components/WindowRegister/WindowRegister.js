@@ -12,16 +12,22 @@ import {useHistory } from "react-router-dom";
 
 import { useMutation } from "react-query";
 
+import {useState} from 'react';
+import AlertBasic from "../Alert/Alert";
+import AlertSmall from "../Alert/AlertSmall";
+
+import axios from 'axios';
+
 const createUser = async (newUsr)=> {
-  console.log("createUser");
-  console.log(newUsr);
-  const res = await fetch(server+"users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",  },
-        body: JSON.stringify({ ...newUsr }),
-      });
-  const {resres} = await res.json();
-  return resres;
+  axios.post(
+    server+"users", 
+    {...newUsr})
+  .then(function (response) {
+    return response
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 const SignupSchema = Yup.object().shape({
@@ -77,36 +83,38 @@ const Bday = ({ ...props }) => {
 
 function WindowRegister (props) {
   let history = useHistory();
+  const [openAlert, setaopenAlert] = useState(false);
+  const [openAlertSmall, setaopenAlertSmall] = useState(false);
 
   const [insertUsr] = useMutation(createUser, {
     onSuccess: ()=>{
-      history.push("/Login")
+      setaopenAlert(true)
+    },
+    onError: ()=>{
+      setaopenAlertSmall(true)
     }
   });
 
 
   const submitForm = (values) => {
     console.log("values");
-    console.log(values);
     if (values.pass !== values.passCon) {
       alert("The password and its confirmation must be the same");
       return;
     }
 
-    fetch( `${server}users?username=${encodeURIComponent( values.username )}`  )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          if (result.length === 0) {
-            insertUsr(values);
-          } else {
-            alert("That username already exists");
-          }
-        },
-        (error) => {
-          console.log("error " + error);
-        }
-      );
+    axios.get(`${server}users?username=${encodeURIComponent( values.username )}`)
+    .then(function (result) {
+      if (result.data.length === 0) {
+        insertUsr(values);
+      } else {
+        alert("That username already exists");
+      }
+    })
+    .catch(function (error) {
+      setaopenAlertSmall(true);
+    });
+    
   };
 
   
@@ -132,6 +140,18 @@ function WindowRegister (props) {
         >
           {({ errors, isSubmitting }) => (
             <Form className={styles.form}>
+
+              {openAlert? 
+                <AlertBasic
+                  title="User Registered"
+                  bodyText="Your account has been created."
+                  okText="Go to LogIn"
+                  okAction={()=>history.push("/Login")}
+                  showCancel={false}
+                />
+              :null
+              }
+
               <h1 className={styles.title}>REGISTER</h1>
 
               <label htmlFor="username" className={styles.inputLabel}>
@@ -211,6 +231,16 @@ function WindowRegister (props) {
                 ) : null}
               </label>
               <Bday id="birthday" name="birthday" />
+
+              {openAlertSmall? 
+                <AlertSmall 
+                  status="error"
+                  title="Conection Error"
+                  text="The Account could not be created."
+                  cancelAction={()=>setaopenAlertSmall(false)}
+                />
+              :null
+              }
 
               <button
                 type="submit"

@@ -1,6 +1,10 @@
 
 const faker = require("faker");
 
+  /*const setStateGeneric = (type, val) => {
+    setState({[type]: val});
+  }*/
+
 const generatorEventList = (size = 3) => {
   return Array(size)
     .fill()
@@ -39,3 +43,26 @@ const generatorEventList = (size = 3) => {
     //componentDidMount
     loadAsyncData();
   },[]) 
+
+  const createEvent = async (newEvent)=> {
+    let options = {
+                method: 'POST',
+                url: server+"events",
+                headers: { "Content-Type": "application/json" },
+                data: { ...newEvent }
+            };
+    let response = await axios(options);
+    let responseOK = response && response.status === 200 && response.statusText === 'OK';
+    if (responseOK) {
+        let data = await response.data;
+        return data;
+    }
+  
+    /*const res = await fetch(server+"events", {
+          method: "POST",
+          headers: { "Content-Type": "application/json",  },
+          body: JSON.stringify({ ...newEvent }),
+        });
+    const {resres} = await res.json();
+    return resres;*/
+  }

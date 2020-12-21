@@ -19,7 +19,7 @@ const EventElement = (props) => (
         "-" +
         props.elem.date.getDate()}
     </p>
-    {props.userID!==0? 
+    {props.showFavButton? 
       <button 
       className={styles.btnFav}
       onClick={()=>props.setFav(props.userID, props.elem.id)}

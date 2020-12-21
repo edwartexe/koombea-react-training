@@ -2,16 +2,18 @@ import { useState } from "react";
 import styles from "./EventList.module.css";
 import EventElement from "./EventElement/EventElement";
 
+import {AuthContext} from "../../../Context/Auth";
+import { useContext } from 'react';
+
 function EventList (props) {
+  const {session} = useContext(AuthContext);
 
   const [eventName,setName] = useState("");
   const [hostName,setHost] = useState("");
   const [eventType,setType] = useState("Any");
   const [favFilter,setFavFilter] = useState(false);
 
-  /*const setStateGeneric = (type, val) => {
-    setState({[type]: val});
-  }*/
+
 
   const eventArray = () => {
     let eventCards = props.eventList.map( 
@@ -42,7 +44,8 @@ function EventList (props) {
             <EventElement 
               key={elem.id}
               elem={elem}
-              userID={props.userID}
+              showFavButton={!!session}
+              userID={session? session.id:0}
               setFav={props.setFav}
             />
           );
@@ -87,7 +90,7 @@ function EventList (props) {
           </select>
         </label>
 
-        {props.userID!==0? 
+        {session? 
           <label htmlFor="favFilter">
             Solo Favoritos:
             <input

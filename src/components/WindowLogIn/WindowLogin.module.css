@@ -5,7 +5,7 @@
 }
 
 .form {
-  width: 240px;
+  min-width: 480px;
   min-height: 240px;
   padding: 30px 60px;
   display: flex;

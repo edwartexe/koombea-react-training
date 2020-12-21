@@ -1,33 +1,32 @@
 import { createContext } from 'react';
 import { useState, useEffect } from "react";
-import { server } from "../../libs/const";
-
+import { server } from "../libs/const";
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
 function MyProvider({children}) {
 
-  const [session, setSession] = useState({
-    username:"",
-    id:0
-  });
+  const [session, setSession] = useState(null);
 
   useEffect(()=>{
     const oldSession2 = localStorage.getItem("rememberSessionID");
-    console.log(oldSession2);
     if(oldSession2!=null){
 
-      fetch( `${server}users/${oldSession2}` )
-      .then((res) => res.json())
-      .then((result) => {
-        if (!!result) {
-          setSession({...result});
-          console.log("weapon got");
+      axios.get(`${server}users/${oldSession2}`)
+      .then(function (result) {
+        if (!!result.data) {
+          setSession({...result.data});
+          console.log("old session got");
         }
       })
       .catch(console.log);
 
     }
+
+    /*return ( )=>{
+      unmount - cleanup
+    }*/
   }, []);
 
   return (

@@ -9,46 +9,57 @@ import { server } from "../../libs/const";
 
 import { useQuery, useMutation, queryCache } from "react-query";
 
-import {AuthContext} from "../Context/Auth";
+import {AuthContext} from "../../Context/Auth";
 import { useContext } from 'react';
 
+import axios from 'axios';
+
 const fetchEvents = async () => {
-  const res= await fetch(server+"events");
-  return res.json();
+  const res = await axios
+  .get(server+"events");
+  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  if (responseOK) {
+    return res.data;
+  }
 }
 
 const fetchFavs = async (key, userid) => {
-  const res= await fetch(`${server}favoriteEvents?user_id=${encodeURIComponent(userid)}`);
-  return res.json();
+  const res = await axios
+  .get(`${server}favoriteEvents?user_id=${userid}`);
+  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  if (responseOK) {
+    return res.data;
+  }
 }
 
 const createFav = async (newFav)=> {
-  const res = await fetch(server+"favoriteEvents", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",  },
-        body: JSON.stringify({ ...newFav }),
-      });
-  const {favoriteEvent} = await res.json();
-  return favoriteEvent;
+  const res = await axios.post(
+    server+"favoriteEvents", 
+    {...newFav});
+  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  if (responseOK) {
+    return res.data;
+  }
 }
 
 const removeFav = async (favID)=> {
-  const res = await fetch(`${server}favoriteEvents/${encodeURIComponent( favID.id )}`, {
-        method: "DELETE"
-      });
-  const {deletion} = await res.json();
-  return deletion;
+  const res = await axios
+  .delete( `${server}favoriteEvents/${ favID.id }`);
+  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  if (responseOK) {
+    return res.data;
+  }
 }
 
 
 
 
 function WindowList (props) {
-  const {session} = useContext(AuthContext)
+  const {session} = useContext(AuthContext);
+  let tempUserId = session? session.id:0;
 
-  //query hooks
   const {data: dataE,  status: statusE} = useQuery("events", fetchEvents);
-  const {data: dataF,  status: statusF} = useQuery(["favs", session.id],fetchFavs);
+  const {data: dataF,  status: statusF} = useQuery(["favs", tempUserId],fetchFavs);
 
   const [insertFav] = useMutation(createFav, {
     onSuccess: (insertedFav)=>{
@@ -66,7 +77,6 @@ function WindowList (props) {
     }
   });
 
-  //local states
   const [period,setPeriod] = useState("Yearly");
   const [yearLowerLimit] = useState(2018);
   const [yearAmmountLimit] = useState(5);
@@ -235,8 +245,8 @@ function WindowList (props) {
             eventList={eventListWithFav()}
             dateStart={date.startDate}
             dateEnd={date.endDate}
-            username={session.username}
-            userID={session.id}
+            /*username={session.username}
+            userID={session.id}*/
             setFav={setFavorite}
           />
         )}

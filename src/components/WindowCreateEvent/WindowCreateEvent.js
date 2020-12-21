@@ -12,14 +12,22 @@ import {useHistory } from "react-router-dom";
 
 import { useMutation } from "react-query";
 
+import {useState} from 'react';
+import AlertBasic from "../Alert/Alert";
+import AlertSmall from "../Alert/AlertSmall";
+
+import axios from 'axios';
+
 const createEvent = async (newEvent)=> {
-  const res = await fetch(server+"events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",  },
-        body: JSON.stringify({ ...newEvent }),
-      });
-  const {resres} = await res.json();
-  return resres;
+  axios.post(
+    server+"events", 
+    {...newEvent})
+  .then(function (response) {
+    return response
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 
@@ -68,10 +76,15 @@ const EventDate = ({ ...props }) => {
 
 function WindowCreateEvent (props) {
   let history = useHistory();
+  const [openAlert, setaopenAlert] = useState(false)
+  const [openAlertSmall, setaopenAlertSmall] = useState(false)
 
   const [insertEvent] = useMutation(createEvent, {
     onSuccess: ()=>{
-      history.push("/List")
+      setaopenAlert(true)
+    },
+    onError: ()=>{
+      setaopenAlertSmall(true)
     }
   });
 
@@ -95,8 +108,24 @@ function WindowCreateEvent (props) {
           }, 400);
         }}
       >
-        {({ errors, isSubmitting }) => (
+        {({ errors, isSubmitting, resetForm, initialValues }) => (
           <Form className={styles.form}>
+
+            {openAlert? 
+              <AlertBasic
+                title="Event Created"
+                bodyText="Your new event has been added to the database."
+                okText="Go to Event List"
+                okAction={()=>history.push("/List")}
+                showCancel={true}
+                cancelAction={()=>{
+                  resetForm(initialValues);
+                  setaopenAlert(false);
+                }}
+              />
+            :null
+            }
+
             <h1 className={styles.title}>CREATE EVENT</h1>
 
             <label htmlFor="name" className={styles.inputLabel}>
@@ -160,7 +189,6 @@ function WindowCreateEvent (props) {
               name="type" 
               as="select" 
               className={styles.input}
-              /*defaultValue={"Public"}*/
             >
               <option value="">select type...</option>
               <option value="Public">Public</option>
@@ -208,6 +236,16 @@ function WindowCreateEvent (props) {
               ) : null}
             </label>
             <EventDate id="date" name="date" />
+
+            {openAlertSmall? 
+              <AlertSmall 
+                status="error"
+                title="Conection Error"
+                text="The Event could not be created."
+                cancelAction={()=>setaopenAlertSmall(false)}
+              />
+            :null
+            }
 
             <button
               type="submit"

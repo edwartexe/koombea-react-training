@@ -61,44 +61,14 @@
       "id": 6
     },
     {
-      "name": "test",
-      "location": "test",
-      "hostname": "tes",
+      "name": "tt",
+      "location": "tt",
+      "hostname": "tt",
       "type": "Private",
-      "date": "2021-03-17T05:00:00.000Z",
-      "tags": "test",
-      "description": "ttttt",
+      "date": "2020-12-30T05:00:00.000Z",
+      "tags": "tt",
+      "description": "tt",
       "id": 7
-    },
-    {
-      "name": "uuu",
-      "location": "uuuuu",
-      "hostname": "uuuuuuu",
-      "type": "Private",
-      "date": "2021-05-20T05:00:00.000Z",
-      "tags": "uuuuuuu",
-      "description": "uuuuuuuuuu",
-      "id": 8
-    },
-    {
-      "name": "qq",
-      "location": "qq",
-      "hostname": "qq",
-      "type": "Public",
-      "date": "2021-05-26T05:00:00.000Z",
-      "tags": "qq",
-      "description": "qq",
-      "id": 9
-    },
-    {
-      "name": "nn",
-      "location": "nn",
-      "hostname": "nn",
-      "type": "Private",
-      "date": "2023-04-19T05:00:00.000Z",
-      "tags": "nn",
-      "description": "nn",
-      "id": 10
     }
   ],
   "users": [
@@ -121,47 +91,37 @@
       "id": 2
     },
     {
-      "username": "hh",
-      "pass": "hh",
-      "passCon": "hh",
-      "name": "hh",
-      "lastName": "hh",
+      "username": "tt",
+      "pass": "tt",
+      "passCon": "tt",
+      "name": "tt",
+      "lastName": "tt",
       "avatar": "",
-      "birthday": "2020-12-30T05:00:00.000Z",
+      "birthday": "2020-12-29T05:00:00.000Z",
       "id": 3
     },
     {
-      "username": "kk",
-      "pass": "hh",
-      "passCon": "hh",
-      "name": "hh",
-      "lastName": "hh",
+      "username": "yy",
+      "pass": "yy",
+      "passCon": "yy",
+      "name": "yy",
+      "lastName": "yy",
       "avatar": "",
       "birthday": "2020-12-30T05:00:00.000Z",
       "id": 4
     },
     {
-      "username": "ll",
-      "pass": "ll",
-      "passCon": "ll",
-      "name": "ll",
-      "lastName": "ll",
+      "username": "gg",
+      "pass": "gg",
+      "passCon": "gg",
+      "name": "gg",
+      "lastName": "gg",
       "avatar": "",
-      "birthday": "2020-12-24T05:00:00.000Z",
+      "birthday": "2020-12-30T05:00:00.000Z",
       "id": 5
     }
   ],
   "favoriteEvents": [
-    {
-      "user_id": 1,
-      "event_id": 4,
-      "id": 5
-    },
-    {
-      "user_id": 1,
-      "event_id": 5,
-      "id": 9
-    },
     {
       "user_id": 2,
       "event_id": 2,
@@ -181,14 +141,29 @@
       "id": 15
     },
     {
-      "user_id": 1,
-      "event_id": 3,
-      "id": 17
-    },
-    {
       "user_id": 2,
       "event_id": 9,
       "id": 19
+    },
+    {
+      "user_id": 3,
+      "event_id": 2,
+      "id": 20
+    },
+    {
+      "user_id": 3,
+      "event_id": 1,
+      "id": 21
+    },
+    {
+      "user_id": 1,
+      "event_id": 3,
+      "id": 23
+    },
+    {
+      "user_id": 1,
+      "event_id": 5,
+      "id": 24
     }
   ]
 }

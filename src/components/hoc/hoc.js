@@ -8,8 +8,6 @@ function CheckUsername(usr) {
     )
   )
 
-  console.log(data)
-
   return false;
 }
 
