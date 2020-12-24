@@ -1,21 +1,30 @@
 import cx from "classnames";
 import styles from "./styles.module.css";
 
+const YearElement = (props) => (
+  <li
+    className={cx(styles.year, {
+      [styles.selected]: props.selectedYear === props.myYear || props.selectAll,
+    })}
+    onClick={()=>props.action(props.myYear)}
+  >
+    {props.myYear}
+  </li>
+);
 
 const yearsArray = (start, ammount, onClick, year, selectAll) => {
   return Array(ammount)
     .fill()
     .map((_, index) => {
       return (
-        <li
+        <YearElement 
           key={index}
-          className={cx(styles.year, {
-            [styles.selected]: year === start + index || selectAll,
-          })}
-          onClick={() => onClick(start + index)}
-        >
-          {start + index}
-        </li>
+          i={index}
+          selectedYear={year}
+          myYear={start + index}
+          selectAll={selectAll}
+          action={onClick}
+        />
       );
     });
 };

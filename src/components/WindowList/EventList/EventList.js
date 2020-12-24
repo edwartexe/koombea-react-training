@@ -1,9 +1,36 @@
 import { useState } from "react";
 import styles from "./EventList.module.css";
 import EventElement from "./EventElement/EventElement";
+import { server } from "../../../libs/const";
+
+import {useMutation } from "react-query";
 
 import {AuthContext} from "../../../Context/Auth";
 import { useContext } from 'react';
+
+import axios from 'axios';
+
+const createFav = async (newFav)=> {
+  const res = await axios
+  .post(
+    server+"favoriteEvents", 
+    {...newFav});
+  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  if (responseOK) {
+    return res.data;
+  }
+}
+
+const removeFav = async (favID)=> {
+  const res = await axios
+  .delete( `${server}favoriteEvents/${ favID.id }`);
+  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  if (responseOK) {
+    return res.data;
+  }
+}
+
+
 
 function EventList (props) {
   const {session} = useContext(AuthContext);
@@ -12,11 +39,63 @@ function EventList (props) {
   const [hostName,setHost] = useState("");
   const [eventType,setType] = useState("Any");
   const [favFilter,setFavFilter] = useState(false);
+  const [myList, setMyList] = useState(props.eventList);
+  const [createFavMutation] = useMutation(createFav);
+  const [removeFavMutation] = useMutation(removeFav);
 
+  const toggleFav = (event) => {
+    let temp = myList
+    
+    if(event.isFav){
+      temp.find( e => e.id === event.id ).isFav = false;
+      setMyList(temp);
 
+      axios
+      .get(`${server}favoriteEvents?user_id=${session.id}&event_id=${event.id}`)
+      .then(function (res) {
+        if (res.data.length > 0) {
+
+          removeFavMutation({ id: res.data[0].id }, {
+            onSuccess: ()=>{
+              props.refetchFav();
+              console.log("deleted success");
+            },
+            onError: ()=>{
+              console.log("deleted error");
+    
+              temp.find( e => e.id === event.id ).isFav = true;
+              setMyList(temp);
+            }
+          });
+          
+        } else {
+          console.log("nothing to remove");
+        }
+      }).catch(
+        console.log
+      );
+      
+    }else{
+      temp.find( e => e.id === event.id ).isFav = true;
+      setMyList(temp);
+
+      createFavMutation({ user_id: session.id, event_id: event.id}, {
+        onSuccess: ()=>{
+          props.refetchFav();
+          console.log("insert success");
+        },
+        onError: ()=>{
+          console.log("insert error");
+          
+          temp.find( e => e.id === event.id ).isFav = false;
+          setMyList(temp);
+        }
+      });
+    }
+  }
 
   const eventArray = () => {
-    let eventCards = props.eventList.map( 
+    let eventCards = myList.map( 
       (elem) => {
       if (
         (
@@ -46,7 +125,7 @@ function EventList (props) {
               elem={elem}
               showFavButton={!!session}
               userID={session? session.id:0}
-              setFav={props.setFav}
+              toggleFav={toggleFav}
             />
           );
       }else{

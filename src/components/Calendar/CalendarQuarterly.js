@@ -2,35 +2,44 @@ import cx from "classnames";
 import styles from "./styles.module.css";
 import { monthName } from "../../libs/const";
 
+const QuarterElement = (props) => (
+  <div
+    className={cx(styles.quarter, {
+      [styles.selected]: props.m1 <= 3 * props.i && 3 * props.i + 2 <= props.m2,
+    })}
+    onClick={() => props.action(3 * props.i, 3 * props.i + 2)}
+  >
+    <div className={styles.quarterNo}> Q{props.i + 1} </div>
+    <div className={styles.month}>
+      <p className={styles.monthText}>
+        {monthName[3 * props.i]} 
+      </p>
+    </div>
+    <div className={styles.month}>
+      <p className={styles.monthText}>
+        {monthName[3 * props.i + 1]} 
+      </p>
+    </div>
+    <div className={styles.month}>
+      <p className={styles.monthText}>
+        {monthName[3 * props.i + 2]} 
+      </p>
+    </div>
+  </div>
+);
+
 const quartArray = (onClick, month1, month2) => {
   return Array(4)
     .fill()
     .map((_, index) => {
       return (
-        <div
-          key={"quart" + index + 1}
-          className={cx(styles.quarter, {
-            [styles.selected]: month1 <= 3 * index && 3 * index + 2 <= month2,
-          })}
-          onClick={() => onClick(3 * index, 3 * index + 2)}
-        >
-          <div className={styles.quarterNo}> Q{index + 1} </div>
-          <div className={styles.month}>
-            <p className={styles.monthText}>
-              {monthName[3 * index]} 
-            </p>
-          </div>
-          <div className={styles.month}>
-            <p className={styles.monthText}>
-              {monthName[3 * index + 1]} 
-            </p>
-          </div>
-          <div className={styles.month}>
-            <p className={styles.monthText}>
-              {monthName[3 * index + 2]} 
-            </p>
-          </div>
-        </div>
+        <QuarterElement 
+        key={index + 1}
+        i={index}
+        m1={month1}
+        m2={month2}
+        action={onClick}
+        />
       );
     });
 };

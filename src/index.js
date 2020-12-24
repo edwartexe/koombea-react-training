@@ -4,12 +4,23 @@ import './index.css';
 import App from './App';
 import MyProvider from "./Context/Auth";
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from "@chakra-ui/react"
+import {ChakraProvider, ThemeProvider, theme } from "@chakra-ui/react"
+
+const breakpoints = ["360px", "768px", "1024px", "1440px"];
+breakpoints.sm = breakpoints[0];
+breakpoints.md = breakpoints[1];
+breakpoints.lg = breakpoints[2];
+breakpoints.xl = breakpoints[3];
+
+const newTheme = {
+  ...theme,
+  breakpoints
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <MyProvider>
-      <ChakraProvider>
+      <ChakraProvider theme={newTheme}>
         <App />
       </ChakraProvider>
     </MyProvider>

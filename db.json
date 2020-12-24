@@ -123,47 +123,14 @@
   ],
   "favoriteEvents": [
     {
-      "user_id": 2,
-      "event_id": 2,
-      "id": 12
-    },
-    {
       "user_id": 1,
       "event_id": 1,
-      "id": 13
-    },
-    {
-      "event_id": 1,
-      "id": 14
-    },
-    {
-      "event_id": 2,
-      "id": 15
-    },
-    {
-      "user_id": 2,
-      "event_id": 9,
-      "id": 19
-    },
-    {
-      "user_id": 3,
-      "event_id": 2,
-      "id": 20
-    },
-    {
-      "user_id": 3,
-      "event_id": 1,
-      "id": 21
+      "id": 1
     },
     {
       "user_id": 1,
       "event_id": 3,
-      "id": 23
-    },
-    {
-      "user_id": 1,
-      "event_id": 5,
-      "id": 24
+      "id": 2
     }
   ]
 }

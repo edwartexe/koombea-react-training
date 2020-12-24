@@ -2,20 +2,30 @@ import cx from "classnames";
 import styles from "./styles.module.css";
 import { monthName } from "../../libs/const";
 
+const MonthElement = (props) => (
+  <div
+    className={cx(styles.month, {
+      [styles.selected]: props.m1 <= props.i && props.i <= props.m2,
+    })}
+    onClick={() => props.action(props.i)}
+  >
+    <p className={styles.monthText}>
+      {props.name}
+    </p>
+  </div>
+);
+
 const monthArray = (onClick, month1, month2) => {
   return monthName.map((name, index) => {
     return (
-      <div
-        key={index}
-        className={cx(styles.month, {
-          [styles.selected]: month1 <= index && index <= month2,
-        })}
-        onClick={() => onClick(index)}
-      >
-        <p className={styles.monthText}>
-          {name}
-        </p>
-      </div>
+      <MonthElement 
+      key={index}
+      i={index}
+      name={name}
+      m1={month1}
+      m2={month2}
+      action={onClick}
+      />
     );
   });
 };

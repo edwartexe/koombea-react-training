@@ -30,17 +30,19 @@
 }
 
 .navButton,
-.navLogout,
-.navLogin {
+.navLogout{
   border-left:1px solid black;
   cursor: pointer;
+  align-items: center;
   display: flex;
 }
 
 .navLink {
   color: inherit;
   text-decoration: inherit;
-  padding: 5px 10px ;
+  padding: 5px 20px ;
+  align-items: center;
+  display: flex;
 }
 
 .navButton:hover {

@@ -7,7 +7,7 @@ import CalendarMonthly from "../Calendar/CalendarMonthly";
 import EventList from "./EventList/EventList";
 import { server } from "../../libs/const";
 
-import { useQuery, useMutation, queryCache } from "react-query";
+import { useQuery, queryCache } from "react-query";
 
 import {AuthContext} from "../../Context/Auth";
 import { useContext } from 'react';
@@ -16,7 +16,7 @@ import axios from 'axios';
 
 const fetchEvents = async () => {
   const res = await axios
-  .get(server+"events");
+  .get(server + "events");
   let responseOK = res && res.status === 200 && res.statusText === 'OK';
   if (responseOK) {
     return res.data;
@@ -32,26 +32,6 @@ const fetchFavs = async (key, userid) => {
   }
 }
 
-const createFav = async (newFav)=> {
-  const res = await axios.post(
-    server+"favoriteEvents", 
-    {...newFav});
-  let responseOK = res && res.status === 200 && res.statusText === 'OK';
-  if (responseOK) {
-    return res.data;
-  }
-}
-
-const removeFav = async (favID)=> {
-  const res = await axios
-  .delete( `${server}favoriteEvents/${ favID.id }`);
-  let responseOK = res && res.status === 200 && res.statusText === 'OK';
-  if (responseOK) {
-    return res.data;
-  }
-}
-
-
 
 
 function WindowList (props) {
@@ -61,21 +41,23 @@ function WindowList (props) {
   const {data: dataE,  status: statusE} = useQuery("events", fetchEvents);
   const {data: dataF,  status: statusF} = useQuery(["favs", tempUserId],fetchFavs);
 
-  const [insertFav] = useMutation(createFav, {
-    onSuccess: (insertedFav)=>{
-      queryCache.refetchQueries("favs");
-      /*queryCache.setQueryData("favs", (current) => [
-        ...current,
-        insertedFav,
-      ]);*/
+  /*const [insertFav] = useMutation(createFav, {
+    onSuccess: ()=>{
+      console.log("fav'd ");
+      //queryCache.refetchQueries("favs");
+      //queryCache.setQueryData("favs", (current) => [
+      //  ...current,
+      //  insertedFav,
+      //]);
     }
-  });
+  } );
   
   const [deleteFav] = useMutation(removeFav, {
     onSuccess: ()=>{
-      queryCache.refetchQueries("favs");
+      console.log("deleted ");
+      //queryCache.refetchQueries("favs");
     }
-  });
+  });*/
 
   const [period,setPeriod] = useState("Yearly");
   const [yearLowerLimit] = useState(2018);
@@ -98,16 +80,45 @@ function WindowList (props) {
 
   }
 
-  const setFavorite = (usrId, eventID) => {
+  const refetchFav = () => {
+    queryCache.refetchQueries("favs");
+  }
+
+  /*const setFavorite = (usrId, eventID, rollBackAction) => {
     let gottenFav = dataF.find((f) => f.event_id === eventID && f.user_id === usrId);
     if(!!gottenFav){
+    
       //it exits
-      deleteFav({ id: gottenFav.id  });
+      //optimistic change to local
+      //dataE.find( e => e.id===eventID ).isFav=false;
+
+      //async for reals
+      deleteFav({ id: gottenFav.id }, {
+        onSuccess: ()=>{
+          console.log("deleted success")
+        },
+        onError: ()=>{
+          console.log("deleted error");
+          rollBackAction();
+        }
+      });
     }else{
       //no result, create
-      insertFav({ user_id: usrId, event_id: eventID  });
+      //optimistic change to local
+      //dataE.find( e => e.id===eventID ).isFav=true;
+
+      //async real change
+      insertFav({ user_id: usrId, event_id: eventID}, {
+        onSuccess: ()=>{
+          console.log("insert success")
+        },
+        onError: ()=>{
+          console.log("insert error");
+          rollBackAction();
+        }
+      });
     }
-  };
+  };*/
 
   const setStateSelectAll = (val) => {
     if (val) {
@@ -243,11 +254,10 @@ function WindowList (props) {
         {statusE === 'success' && statusF=== 'success' && (
           <EventList
             eventList={eventListWithFav()}
+            favList={dataF}
             dateStart={date.startDate}
             dateEnd={date.endDate}
-            /*username={session.username}
-            userID={session.id}*/
-            setFav={setFavorite}
+            refetchFav={refetchFav}
           />
         )}
       </div>
