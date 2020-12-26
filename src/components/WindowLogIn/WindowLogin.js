@@ -13,6 +13,7 @@ import AlertSmall from "../Alert/AlertSmall";
 
 import axios from 'axios';
 
+import { Box, Heading, Flex, Text, Button} from "@chakra-ui/react";
 
 const WindowLogin = (props) => {
   let history = useHistory();

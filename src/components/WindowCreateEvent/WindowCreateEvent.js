@@ -101,6 +101,8 @@ function WindowCreateEvent (props) {
           description: "",
         }}
         validationSchema={SignupSchema}
+        validateOnChange={false}
+        validateOnBlur={false}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             insertEvent(values);
@@ -161,7 +163,7 @@ function WindowCreateEvent (props) {
             />
 
             <label htmlFor="hostname" className={styles.inputLabel}>
-              Who is the Host:
+              Host Name:
               {errors.hostname ? (
                 <span className={styles.errorMessage}>
                   {errors.hostname}
@@ -196,7 +198,7 @@ function WindowCreateEvent (props) {
             </Field>
 
             <label htmlFor="tags" className={styles.inputLabel}>
-              Add Tags:
+              Tags:
               {errors.tags ? (
                 <span className={styles.errorMessage}>
                   {errors.tags}
@@ -212,7 +214,7 @@ function WindowCreateEvent (props) {
             />
 
             <label htmlFor="description" className={styles.inputLabel}>
-              Add Description:
+              Description:
               {errors.description ? (
                 <span className={styles.errorMessage}>
                   {errors.description}
@@ -228,7 +230,7 @@ function WindowCreateEvent (props) {
             />
 
             <label htmlFor="date" className={styles.inputLabel}>
-              Event Date:
+              Date:
               {errors.date ? (
                 <span className={styles.errorMessage}>
                   {errors.date}

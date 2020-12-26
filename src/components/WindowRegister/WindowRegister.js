@@ -18,6 +18,8 @@ import AlertSmall from "../Alert/AlertSmall";
 
 import axios from 'axios';
 
+import { Box, Heading, Flex, Text, Button} from "@chakra-ui/react";
+
 const createUser = async (newUsr)=> {
   axios.post(
     server+"users", 
@@ -131,6 +133,8 @@ function WindowRegister (props) {
             birthday: "",
           }}
           validationSchema={SignupSchema}
+          validateOnChange={false}
+          validateOnBlur={false}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               submitForm(values);
@@ -156,81 +160,95 @@ function WindowRegister (props) {
 
               <label htmlFor="username" className={styles.inputLabel}>
                 Username:
+                <Field
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Username:"
+                  className={styles.input}
+                />
                 {errors.username ? (
                   <span className={styles.errorMessage}>{errors.username}</span>
                 ) : null}
               </label>
-              <Field
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Username:"
-                className={styles.input}
-              />
 
-              <label htmlFor="pass" className={styles.inputLabel}>
-                Password:
-                {errors.pass ? (
-                  <span className={styles.errorMessage}>{errors.pass}</span>
-                ) : null}
-              </label>
-              <Field
-                type="password"
-                id="pass"
-                name="pass"
-                placeholder="Password:"
-                className={styles.input}
-              />
+              <Flex
+                direction={{sm: "column", md:"row"}}
+              >
+                <label htmlFor="pass" className={styles.inputLabel}>
+                  Password:
+                  <Field
+                    type="password"
+                    id="pass"
+                    name="pass"
+                    placeholder="Password:"
+                    className={styles.input}
+                  />
+                  {errors.pass ? (
+                    <span className={styles.errorMessage}>{errors.pass}</span>
+                  ) : null}
+                </label>
 
-              <label htmlFor="passCon" className={styles.inputLabel}>
-                Password Confirm:
-                {errors.passCon ? (
-                  <span className={styles.errorMessage}>{errors.passCon}</span>
-                ) : null}
-              </label>
-              <Field
-                type="password"
-                id="passCon"
-                name="passCon"
-                placeholder=" Password Confirm:"
-                className={styles.input}
-              />
+                <span className={styles.spacer} />
 
-              <label htmlFor="name" className={styles.inputLabel}>
-                First Name:
-                {errors.name ? (
-                  <span className={styles.errorMessage}>{errors.name}</span>
-                ) : null}
-              </label>
-              <Field
-                type="text"
-                id="name"
-                name="name"
-                placeholder="First Name:"
-                className={styles.input}
-              />
+                <label htmlFor="passCon" className={styles.inputLabel}>
+                  Confirm Password:
+                  <Field
+                    type="password"
+                    id="passCon"
+                    name="passCon"
+                    placeholder=" Password Confirm:"
+                    className={styles.input}
+                  />
+                  {errors.passCon ? (
+                    <span className={styles.errorMessage}>{errors.passCon}</span>
+                  ) : null}
+                </label>
+              </Flex>
 
-              <label htmlFor="lastName" className={styles.inputLabel}>
-                Last Name:
-                {errors.lastName ? (
-                  <span className={styles.errorMessage}>{errors.lastName}</span>
-                ) : null}
-              </label>
-              <Field
-                type="text"
-                id="lastName"
-                name="lastName"
-                placeholder="Last Name:"
-                className={styles.input}
-              />
+
+              <Flex
+                direction={{sm: "column", md:"row"}}
+              >
+                <label htmlFor="name" className={styles.inputLabel}>
+                  First Name:
+                  <Field
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="First Name:"
+                    className={styles.input}
+                  />
+                  {errors.name ? (
+                    <span className={styles.errorMessage}>{errors.name}</span>
+                  ) : null}
+                </label>
+
+                <span className={styles.spacer} />
+
+                <label htmlFor="lastName" className={styles.inputLabel}>
+                  Last Name:
+                  <Field
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Last Name:"
+                    className={styles.input}
+                  />
+                  {errors.lastName ? (
+                    <span className={styles.errorMessage}>{errors.lastName}</span>
+                  ) : null}
+                </label>
+              </Flex>
+              
 
               <label htmlFor="birthday" className={styles.inputLabel}>
                 Birthday:
+                <Bday id="birthday" name="birthday" />
                 {errors.birthday ? (
                   <span className={styles.errorMessage}>{errors.birthday}</span>
                 ) : null}
               </label>
-              <Bday id="birthday" name="birthday" />
 
               {openAlertSmall? 
                 <AlertSmall 

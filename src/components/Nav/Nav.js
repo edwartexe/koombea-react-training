@@ -5,16 +5,32 @@ import {useHistory } from "react-router-dom";
 import {AuthContext} from "../../Context/Auth";
 import {useState, useContext } from 'react';
 
-import { Box, Heading, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Heading, Flex, Text, Button, 
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider} from "@chakra-ui/react";
 import cx from "classnames";
 
 const NavItems = (props) => (
-  <Text 
+  <Button 
     as="li"
     align="center" 
-    className={cx(styles.navButton, {
-      [styles.navLogin]: props.login
-    })}
+    height="100%"
+    borderRadius="0"
+    p="0"
+    color="#6f7287"
+    bg={props.login? "#cfc" : "#fff"}
+    _hover={{ 
+      bg: props.login? "#9f9" : "#ddd",
+      color: "#39364f"
+   }}
   >  
     <Link 
     to={props.to}
@@ -22,77 +38,54 @@ const NavItems = (props) => (
     >
       {props.children}
     </Link>
-  </Text>
+  </Button>
 );
 
 const NavLogout = (props)=>(
-  <li 
-    key={0} 
-    className={styles.navLogout} 
-    onClick={props.action} 
-  >  
-    Logout 
-  </li>
+  <Menu>
+    <MenuButton 
+      as={Button}
+      align="center" 
+      height="100%"
+      borderRadius="0"
+      p="5px 20px"
+      color="#6f7287"
+      bg="#fff"
+      _hover={{ 
+        bg: "#ddd",
+        color: "#39364f"
+    }}
+    >
+      {props.usr} ▼
+    </MenuButton>
+    <MenuList
+      p="0"
+    >
+      <MenuItem>Hello There...</MenuItem>
+      <MenuItem>General Kenobi!</MenuItem>
+
+      <MenuItem
+        key={0} 
+        onClick={props.action} 
+
+        align="center" 
+        height="100%"
+        borderRadius="0"
+        p="5px 20px"
+        color="#6f7287"
+        bg="#fcc"
+        _hover={{ 
+          bg: "#f99",
+          color: "#39364f"
+      }}
+      >  
+        Logout 
+      </MenuItem>
+    </MenuList>
+</Menu>
+
+  
 );
-
-
-
-function Nav (props) {
-  let history = useHistory();
-  const {session, setSession} = useContext(AuthContext);
-  const [show, setShow] = useState(false);
- 
-
-  const logoutAccount = () => {
-    setSession(null);
-    localStorage.removeItem("rememberSessionID");
-    history.push({pathname:  "/Login"})
-  };
-
-  return (
-    <nav className={styles.nav}> 
-      
-      <h1 className={styles.navUser}>
-        {session? "Welcome, "+session.username: ""}
-      </h1>
-    
-      <ul className={styles.navBar}>
-        <h2 className={styles.navTitle}>Navigation</h2>
-
-        <NavItems key={1} to="/List">Event List</NavItems>
-
-        {session? 
-          [
-          <NavItems key={3} to="/Create">NEW event</NavItems>,
-          <NavLogout key={0} action={logoutAccount} />
-          ]
-        : 
-          [
-          <NavItems key={2} to="/Register">Sign Up</NavItems>,
-          <NavItems key={0} to="/Login" login={true}>Login</NavItems>
-          ]
-        }
-        
-      </ul>
-    </nav>
-
-  );
-}
-
-
-
-
-export default Nav2;
-
-
-
-
-
-
-
-
-
-
 
 
 function Nav2 (props)  {
@@ -129,15 +122,6 @@ function Nav2 (props)  {
         >
           Not-EventBrite
         </Heading>
-        <Text 
-          as="h2"
-          size="m" 
-          pt="24px"
-          pb="12px"
-          pl="5px"
-        >
-          {session? "Welcome, "+session.username: ""}
-        </Text>
       </Flex>
 
       <Box 
@@ -167,7 +151,7 @@ function Nav2 (props)  {
 
         {session? 
           [
-          <NavLogout key={0} action={logoutAccount} />,
+          <NavLogout key={0} action={logoutAccount} usr={session.username}/>,
           <NavItems key={3} to="/Create">NEW event</NavItems>
           ]
         : 
@@ -176,8 +160,10 @@ function Nav2 (props)  {
           <NavItems key={2} to="/Register">Sign Up</NavItems>
           ]
         }
-        <NavItems key={1} to="/List">Event List</NavItems>
+        <NavItems key={1} to="/List">Browse Events</NavItems>
       </Box>
     </Flex>
   );
 };
+
+export default Nav2;
