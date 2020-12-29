@@ -1,50 +1,59 @@
 import styles from "./DateRangePicker.module.css";
 
+import { Text, Checkbox, Radio, Stack, RadioGroup } from "@chakra-ui/react";
+
 const DateRangePicker = (props) => (
+<div className={styles.wrapper}>
   <div className={styles.layout}>
-    <h2>Select Timeframe</h2>
 
-    <label for="period1">
-      <input
-        type="radio"
-        id="period1"
-        name="period"
-        onClick={() => props.setPeriod("Yearly")}
-      />
-      Yearly
-    </label>
+    <Text 
+      as="h2"
+      fontSize="18px"
+      lineHeight="24px"
+      fontWeight="600"
+      textAlign="center"
+    > 
+      Select Timeframe
+    </Text>
 
-    <label for="period2">
-      <input
-        type="radio"
-        id="period2"
-        name="period"
-        onClick={() => props.setPeriod("Quarterly")}
-      />
-      Quarterly
-    </label>
+    <RadioGroup onChange={props.setPeriod} defaultValue="Yearly">
+      <Stack direction="column">
+        <Radio colorScheme="brand" value="Yearly">Yearly</Radio>
+        <Radio colorScheme="brand" value="Quarterly">Quarterly</Radio>
+        <Radio colorScheme="brand" value="Monthly">Monthly</Radio>
+      </Stack>
+    </RadioGroup>
 
-    <label for="period3">
-      <input
-        type="radio"
-        id="period3"
-        name="period"
-        onClick={() => props.setPeriod("Monthly")}
-      />
-      Monthly
-    </label>
-
-    <label for="selectAll">
-      <input
+    <label htmlFor="selectAll">
+      <Checkbox
         type="checkbox"
+        colorScheme="brand"
         id="selectAll"
         name="selectAll"
-        checked={props.selectAll}
-        disabled={props.selectAllenabled ? "disabled" : ""}
+        isChecked={props.selectAll}
+        mr="5px"
+        isDisabled={props.selectAllenabled ? "disabled" : ""}
         onChange={(e) => props.setSelectAll(e.target.checked)}
       />
       Select All
     </label>
+
+    {props.showFav? 
+      <label htmlFor="favFilter">
+        <Checkbox
+          type="checkbox"
+          colorScheme="brand"
+          id="favFilter"
+          name="favFilter"
+          isChecked={props.favFilter}
+          mr="5px"
+          onChange={(e) => props.setFavFilter( e.target.checked)}
+        />
+        Solo Favoritos
+      </label>
+    :
+      null
+    }
 
     <div className={styles.dateDisplay}>
       <p className={styles.dateBlock}>
@@ -64,7 +73,10 @@ const DateRangePicker = (props) => (
           props.dateEnd.getDate()}
       </p>
     </div>
+
   </div>
+  {props.children}
+</div>
 );
 
 export default DateRangePicker;

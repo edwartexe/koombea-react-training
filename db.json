@@ -1,0 +1,171 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Introductions",
+      "location": "Online Event",
+      "hostname": "Koombea",
+      "type": "Private",
+      "date": "2020-11-2",
+      "tags": "meeting",
+      "description": "team introduction"
+    },
+    {
+      "id": 2,
+      "name": "Game Awards",
+      "location": "Online Event",
+      "hostname": "Keanu Reves",
+      "type": "Public",
+      "date": "2020-12-10",
+      "tags": "games",
+      "description": "gaming show"
+    },
+    {
+      "name": "meteor shower",
+      "location": "anywhere",
+      "hostname": "the sky",
+      "type": "Public",
+      "date": "2020-12-13T05:00:00.000Z",
+      "tags": "space",
+      "description": "watch the meteor shower",
+      "id": 3
+    },
+    {
+      "name": "Christmas",
+      "location": "round the world",
+      "hostname": "You",
+      "type": "Public",
+      "date": "2020-12-25T05:00:00.000Z",
+      "tags": "xmas christmas",
+      "description": "Celebrate the arrival of sandy claws",
+      "id": 4
+    },
+    {
+      "name": "MH Rise",
+      "location": "Online Event",
+      "hostname": "Capcom",
+      "type": "Public",
+      "date": "2021-03-26T05:00:00.000Z",
+      "tags": "monster hunter",
+      "description": "time to go for the oil",
+      "id": 5
+    },
+    {
+      "name": "Carnaval",
+      "location": "barranquilla",
+      "hostname": "barranquilla",
+      "type": "Public",
+      "date": "2021-02-14T05:00:00.000Z",
+      "tags": "carnaval",
+      "description": "carnaval",
+      "id": 6
+    },
+    {
+      "name": "Koombea Test",
+      "location": "barranquilla",
+      "hostname": "Koombea barranquilla",
+      "type": "Private",
+      "date": "2020-12-30T05:00:00.000Z",
+      "tags": "tt",
+      "description": "tt",
+      "id": 7
+    },
+    {
+      "name": "John Wick",
+      "location": "cine",
+      "hostname": "Keanu Memes",
+      "type": "Public",
+      "date": "2021-02-27T05:00:00.000Z",
+      "tags": "keanu film",
+      "description": "angry keanu part 3",
+      "id": 8
+    },
+    {
+      "name": "John Snow Birthday",
+      "location": "dunno, didnt watch Game of thrones",
+      "hostname": "You",
+      "type": "Public",
+      "date": "2021-12-26T05:00:00.000Z",
+      "tags": "",
+      "description": "",
+      "id": 9
+    },
+    {
+      "name": "Game Meteor",
+      "location": "Sky Island",
+      "hostname": "You Too",
+      "type": "Public",
+      "date": "2021-04-02T05:00:00.000Z",
+      "tags": "This is a test",
+      "description": "Testing, atention please",
+      "id": 10
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "ed",
+      "pass": "yes",
+      "name": "eduardo",
+      "lastName": "ramirez",
+      "avatar": "avatar.jpg",
+      "birthday": "1995-4-2"
+    },
+    {
+      "username": "q",
+      "pass": "q",
+      "name": "q",
+      "lastName": "q",
+      "birthday": "2020-12-13T05:00:00.000Z",
+      "avatar": "",
+      "id": 2
+    },
+    {
+      "username": "tt",
+      "pass": "tt",
+      "passCon": "tt",
+      "name": "tt",
+      "lastName": "tt",
+      "avatar": "",
+      "birthday": "2020-12-29T05:00:00.000Z",
+      "id": 3
+    },
+    {
+      "username": "yy",
+      "pass": "yy",
+      "passCon": "yy",
+      "name": "yy",
+      "lastName": "yy",
+      "avatar": "",
+      "birthday": "2020-12-30T05:00:00.000Z",
+      "id": 4
+    },
+    {
+      "username": "gg",
+      "pass": "gg",
+      "passCon": "gg",
+      "name": "gg",
+      "lastName": "gg",
+      "avatar": "",
+      "birthday": "2020-12-30T05:00:00.000Z",
+      "id": 5
+    }
+  ],
+  "favoriteEvents": [
+    {
+      "user_id": 1,
+      "event_id": 1,
+      "id": 1
+    },
+    {
+      "user_id": 1,
+      "event_id": 3,
+      "id": 2
+    },
+    {
+      "user_id": 1,
+      "event_id": 5,
+      "id": 3
+    }
+  ]
+}
