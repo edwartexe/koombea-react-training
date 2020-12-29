@@ -7,12 +7,12 @@
     "static/js/1.28b66ea3.chunk.js": "//edwartexe.github.io/koombea-react-training/static/js/1.28b66ea3.chunk.js",
     "static/js/1.28b66ea3.chunk.js.map": "//edwartexe.github.io/koombea-react-training/static/js/1.28b66ea3.chunk.js.map",
     "main.css": "//edwartexe.github.io/koombea-react-training/static/css/main.f24517e2.chunk.css",
-    "main.js": "//edwartexe.github.io/koombea-react-training/static/js/main.187de2bf.chunk.js",
-    "main.js.map": "//edwartexe.github.io/koombea-react-training/static/js/main.187de2bf.chunk.js.map",
+    "main.js": "//edwartexe.github.io/koombea-react-training/static/js/main.6ef91de4.chunk.js",
+    "main.js.map": "//edwartexe.github.io/koombea-react-training/static/js/main.6ef91de4.chunk.js.map",
     "runtime-main.js": "//edwartexe.github.io/koombea-react-training/static/js/runtime-main.ac364d61.js",
     "runtime-main.js.map": "//edwartexe.github.io/koombea-react-training/static/js/runtime-main.ac364d61.js.map",
-    "static/js/4.a07816a0.chunk.js": "//edwartexe.github.io/koombea-react-training/static/js/4.a07816a0.chunk.js",
-    "static/js/4.a07816a0.chunk.js.map": "//edwartexe.github.io/koombea-react-training/static/js/4.a07816a0.chunk.js.map",
+    "static/js/4.86f8b1f3.chunk.js": "//edwartexe.github.io/koombea-react-training/static/js/4.86f8b1f3.chunk.js",
+    "static/js/4.86f8b1f3.chunk.js.map": "//edwartexe.github.io/koombea-react-training/static/js/4.86f8b1f3.chunk.js.map",
     "static/css/5.d2c9c761.chunk.css": "//edwartexe.github.io/koombea-react-training/static/css/5.d2c9c761.chunk.css",
     "static/js/5.e60cec97.chunk.js": "//edwartexe.github.io/koombea-react-training/static/js/5.e60cec97.chunk.js",
     "static/js/5.e60cec97.chunk.js.map": "//edwartexe.github.io/koombea-react-training/static/js/5.e60cec97.chunk.js.map",
@@ -28,13 +28,13 @@
     "static/css/6.b47cc5e4.chunk.css.map": "//edwartexe.github.io/koombea-react-training/static/css/6.b47cc5e4.chunk.css.map",
     "static/css/main.f24517e2.chunk.css.map": "//edwartexe.github.io/koombea-react-training/static/css/main.f24517e2.chunk.css.map",
     "static/js/0.90cb1277.chunk.js.LICENSE.txt": "//edwartexe.github.io/koombea-react-training/static/js/0.90cb1277.chunk.js.LICENSE.txt",
-    "static/js/4.a07816a0.chunk.js.LICENSE.txt": "//edwartexe.github.io/koombea-react-training/static/js/4.a07816a0.chunk.js.LICENSE.txt",
+    "static/js/4.86f8b1f3.chunk.js.LICENSE.txt": "//edwartexe.github.io/koombea-react-training/static/js/4.86f8b1f3.chunk.js.LICENSE.txt",
     "static/media/search.487d4cce.png": "//edwartexe.github.io/koombea-react-training/static/media/search.487d4cce.png"
   },
   "entrypoints": [
     "static/js/runtime-main.ac364d61.js",
-    "static/js/4.a07816a0.chunk.js",
+    "static/js/4.86f8b1f3.chunk.js",
     "static/css/main.f24517e2.chunk.css",
-    "static/js/main.187de2bf.chunk.js"
+    "static/js/main.6ef91de4.chunk.js"
   ]
 }
