@@ -31,7 +31,7 @@
       "id": 3
     },
     {
-      "name": "christmas",
+      "name": "Christmas",
       "location": "round the world",
       "hostname": "You",
       "type": "Public",
@@ -51,7 +51,7 @@
       "id": 5
     },
     {
-      "name": "carnaval",
+      "name": "Carnaval",
       "location": "barranquilla",
       "hostname": "barranquilla",
       "type": "Public",
@@ -61,9 +61,9 @@
       "id": 6
     },
     {
-      "name": "tt",
-      "location": "tt",
-      "hostname": "tt",
+      "name": "Koombea Test",
+      "location": "barranquilla",
+      "hostname": "Koombea barranquilla",
       "type": "Private",
       "date": "2020-12-30T05:00:00.000Z",
       "tags": "tt",
@@ -79,6 +79,26 @@
       "tags": "keanu film",
       "description": "angry keanu part 3",
       "id": 8
+    },
+    {
+      "name": "John Snow Birthday",
+      "location": "dunno, didnt watch Game of thrones",
+      "hostname": "You",
+      "type": "Public",
+      "date": "2021-12-26T05:00:00.000Z",
+      "tags": "",
+      "description": "",
+      "id": 9
+    },
+    {
+      "name": "Game Meteor",
+      "location": "Sky Island",
+      "hostname": "You Too",
+      "type": "Public",
+      "date": "2021-04-02T05:00:00.000Z",
+      "tags": "This is a test",
+      "description": "Testing, atention please",
+      "id": 10
     }
   ],
   "users": [
