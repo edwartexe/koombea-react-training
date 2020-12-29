@@ -10,16 +10,15 @@
 
 .btnFav {
   position: absolute;
-  top:0;
-  right: 0;
+  top:15px;
+  right: 15px;
   border:0;
   background: none;
 }
 
 .starFav {    
-  width: 25px;
-  height: 25px;
-  padding: 5px;
+  width: 15px;
+  height: 15px;
 }
 
 .eventTitle {

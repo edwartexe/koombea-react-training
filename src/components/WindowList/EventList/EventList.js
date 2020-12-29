@@ -10,6 +10,11 @@ import { useContext } from 'react';
 
 import axios from 'axios';
 
+import searchIcon from "../../../assets/search.png";
+
+import { Box, Flex, Input} from "@chakra-ui/react";
+
+
 const createFav = async (newFav)=> {
   const res = await axios
   .post(
@@ -35,10 +40,7 @@ const removeFav = async (favID)=> {
 function EventList (props) {
   const {session} = useContext(AuthContext);
 
-  const [eventName,setName] = useState("");
-  const [hostName,setHost] = useState("");
-  const [eventType,setType] = useState("Any");
-  const [favFilter,setFavFilter] = useState(false);
+  const [searchTag,setSearch] = useState("");
   const [myList, setMyList] = useState(props.eventList);
   const [createFavMutation] = useMutation(createFav);
   const [removeFavMutation] = useMutation(removeFav);
@@ -95,6 +97,13 @@ function EventList (props) {
   }
 
   const eventArray = () => {
+    let searchTags = searchTag.split(" ").map(function(v) {
+      return v.toLowerCase();
+    });
+    searchTags = searchTags.filter(function (value, index, thisArray) {
+      return thisArray.indexOf(value) === index && !!value;
+    });
+    console.log(searchTags);
     let eventCards = myList.map( 
       (elem) => {
       if (
@@ -103,20 +112,19 @@ function EventList (props) {
           elem.date <= props.dateEnd
         )
         && (
-          elem.name
-            .toLowerCase()
-            .includes(eventName.toLowerCase()) &&
-          elem.hostname
-            .toLowerCase()
-            .includes(hostName.toLowerCase())
-        ) 
+          searchTags.reduce((acum, current)=>{
+            return acum 
+            && (
+              elem.name.toLowerCase().includes(current) ||
+              elem.hostname.toLowerCase().includes(current) ||
+              elem.type.toLowerCase().includes(current) ||
+              current.replaceAll("\\s+", "")===""
+            );
+          }, true)
+        )
         && (
-          eventType === "Any" ||
-          elem.type === eventType
-        ) 
-        && (
-          (favFilter && elem.isFav) || 
-          !favFilter
+          (props.favFilter && elem.isFav) || 
+          !props.favFilter
         ) 
         ){
           return (
@@ -138,54 +146,34 @@ function EventList (props) {
 
   return (
     <div className={styles.eventList}>
-      <div className={styles.inputRow}>
-        <label className={styles.input} htmlFor="name">
-          Event Name:
-          <input
-            type="text"
-            id="name"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
 
-        <label className={styles.input} htmlFor="hostname">
-          Host Name:
-          <input
-            type="text"
-            id="hostname"
-            onChange={(e) => setHost(e.target.value)}
-          />
-        </label>
-
-        <label className={styles.input} htmlFor="eventtype">
-          Event Type:
-          <select
-            id="eventtype"
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option value="Any">Any</option>
-            <option value="Private">Private</option>
-            <option value="Public">Public</option>
-          </select>
-        </label>
-
-        {session? 
-          <label htmlFor="favFilter">
-            Solo Favoritos:
-            <input
-              type="checkbox"
-              id="favFilter"
-              name="favFilter"
-              checked={props.favFilter}
-              onChange={(e) => setFavFilter( e.target.checked)}
+      <Flex
+        as="ul"
+        direction="column"
+        p="0"
+        h="0"
+        flex="1 1 auto"
+        overflowY="auto"
+      >
+        <Box
+          p="5px 15px"
+          w={{sm:"auto", lg:"760px"}} 
+        >
+          <Flex>
+            <img src={searchIcon} alt="search" className={styles.searchIcon} />
+            
+            <Input
+              placeholder="Search Anything"
+              fontSize="14px"
+              fontWeight="400"
+              flex="1 1 0%"
+              onChange={(e) => setSearch(e.target.value)}
             />
-          </label>
-        :
-          null
-        }
-      </div>
-
-      <ul className={styles.displayList}>{eventArray()}</ul>
+          </Flex>
+          
+          {eventArray()}
+        </Box>
+      </Flex>
     </div>
   );
   

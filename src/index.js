@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
 import MyProvider from "./Context/Auth";
-import reportWebVitals from './reportWebVitals';
-import {ChakraProvider, ThemeProvider, theme } from "@chakra-ui/react"
+import reportWebVitals from "./reportWebVitals";
+import { ChakraProvider, theme } from "@chakra-ui/react";
 
 const breakpoints = ["360px", "768px", "1024px", "1440px"];
 breakpoints.sm = breakpoints[0];
@@ -14,7 +14,14 @@ breakpoints.xl = breakpoints[3];
 
 const newTheme = {
   ...theme,
-  breakpoints
+  breakpoints,
+  colors: {
+    ...theme.colors,
+    brand: {
+      300: "#eda58a",
+      500: "#d1410c",
+    },
+  },
 };
 
 ReactDOM.render(
@@ -25,7 +32,7 @@ ReactDOM.render(
       </ChakraProvider>
     </MyProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -9,154 +9,97 @@ import { server } from "../../libs/const";
 
 import { useQuery, queryCache } from "react-query";
 
-import {AuthContext} from "../../Context/Auth";
-import { useContext } from 'react';
+import { AuthContext } from "../../Context/Auth";
+import { useContext } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
 const fetchEvents = async () => {
-  const res = await axios
-  .get(server + "events");
-  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  const res = await axios.get(server + "events");
+  let responseOK = res && res.status === 200 && res.statusText === "OK";
   if (responseOK) {
     return res.data;
   }
-}
+};
 
 const fetchFavs = async (key, userid) => {
-  const res = await axios
-  .get(`${server}favoriteEvents?user_id=${userid}`);
-  let responseOK = res && res.status === 200 && res.statusText === 'OK';
+  const res = await axios.get(`${server}favoriteEvents?user_id=${userid}`);
+  let responseOK = res && res.status === 200 && res.statusText === "OK";
   if (responseOK) {
     return res.data;
   }
-}
+};
 
+function WindowList(props) {
+  const { session } = useContext(AuthContext);
+  let tempUserId = session ? session.id : 0;
 
+  const { data: dataE, status: statusE } = useQuery(
+    "events",
+    fetchEvents);
+  const { data: dataF, status: statusF } = useQuery(
+    ["favs", tempUserId],
+    fetchFavs
+  );
 
-function WindowList (props) {
-  const {session} = useContext(AuthContext);
-  let tempUserId = session? session.id:0;
-
-  const {data: dataE,  status: statusE} = useQuery("events", fetchEvents);
-  const {data: dataF,  status: statusF} = useQuery(["favs", tempUserId],fetchFavs);
-
-  /*const [insertFav] = useMutation(createFav, {
-    onSuccess: ()=>{
-      console.log("fav'd ");
-      //queryCache.refetchQueries("favs");
-      //queryCache.setQueryData("favs", (current) => [
-      //  ...current,
-      //  insertedFav,
-      //]);
-    }
-  } );
-  
-  const [deleteFav] = useMutation(removeFav, {
-    onSuccess: ()=>{
-      console.log("deleted ");
-      //queryCache.refetchQueries("favs");
-    }
-  });*/
-
-  const [period,setPeriod] = useState("Yearly");
+  const [period, setPeriod] = useState("Yearly");
   const [yearLowerLimit] = useState(2018);
   const [yearAmmountLimit] = useState(5);
   const [date, setDate] = useState({
     year: 2020,
     selectAll: true,
     startDate: new Date("2020-1-2"),
-    endDate: new Date("2022-12-31")
+    endDate: new Date("2022-12-31"),
   });
+  const [favFilter, setFavFilter] = useState(false);
 
   const eventListWithFav = () => {
     return dataE
-    .map((e) => {
-      e.date = new Date(e.date);
-      e.isFav = !!dataF.find((f) => f.event_id === e.id);
-      return e;
-    })
-    .sort((a, b) => (a.date > b.date ? 1 : -1));
-
-  }
+      .map((e) => {
+        e.date = new Date(e.date);
+        e.isFav = !!dataF.find((f) => f.event_id === e.id);
+        return e;
+      })
+      .sort((a, b) => (a.date > b.date ? 1 : -1));
+  };
 
   const refetchFav = () => {
     queryCache.refetchQueries("favs");
-  }
-
-  /*const setFavorite = (usrId, eventID, rollBackAction) => {
-    let gottenFav = dataF.find((f) => f.event_id === eventID && f.user_id === usrId);
-    if(!!gottenFav){
-    
-      //it exits
-      //optimistic change to local
-      //dataE.find( e => e.id===eventID ).isFav=false;
-
-      //async for reals
-      deleteFav({ id: gottenFav.id }, {
-        onSuccess: ()=>{
-          console.log("deleted success")
-        },
-        onError: ()=>{
-          console.log("deleted error");
-          rollBackAction();
-        }
-      });
-    }else{
-      //no result, create
-      //optimistic change to local
-      //dataE.find( e => e.id===eventID ).isFav=true;
-
-      //async real change
-      insertFav({ user_id: usrId, event_id: eventID}, {
-        onSuccess: ()=>{
-          console.log("insert success")
-        },
-        onError: ()=>{
-          console.log("insert error");
-          rollBackAction();
-        }
-      });
-    }
-  };*/
+  };
 
   const setStateSelectAll = (val) => {
     if (val) {
       let firstDay = new Date(yearLowerLimit, 0, 1);
-      let lastDay = new Date(
-        yearLowerLimit + yearAmmountLimit,
-        11,
-        31
-      );
-      setDate({ 
+      let lastDay = new Date(yearLowerLimit + yearAmmountLimit, 11, 31);
+      setDate({
         ...date,
         selectAll: val,
         startDate: firstDay,
-        endDate: lastDay 
+        endDate: lastDay,
       });
     }
   };
-  
+
   const setStateYear = (val) => {
     const firstDay = new Date(val, date.startDate.getMonth(), 1);
     const lastDay = new Date(val, date.endDate.getMonth() + 1, 0);
 
-    setDate({ 
+    setDate({
       ...date,
-      year:val,
+      year: val,
       startDate: firstDay,
-      endDate: lastDay 
+      endDate: lastDay,
     });
   };
 
   const setStateDateFromYear = (year) => {
     let firstDay = new Date(year, 0, 1);
     let lastDay = new Date(year, 11, 31);
-    setDate({ 
-      year: year ,
-      startDate: firstDay ,
-      endDate: lastDay ,
-      selectAll: false 
+    setDate({
+      year: year,
+      startDate: firstDay,
+      endDate: lastDay,
+      selectAll: false,
     });
   };
 
@@ -164,35 +107,38 @@ function WindowList (props) {
     let firstDay = new Date(date.year, month1, 1);
     let lastDay = new Date(date.year, month2 + 1, 0);
 
-    setDate({ 
+    setDate({
       ...date,
       startDate: firstDay,
       endDate: lastDay,
-      selectAll: false 
+      selectAll: false,
     });
   };
 
   const setStateDateFromMonth = (month) => {
     let lastDay = new Date(date.year, month + 1, 0);
 
-    if (month <= date.startDate.getMonth() || month === date.endDate.getMonth() ) {
+    if (
+      month <= date.startDate.getMonth() ||
+      month === date.endDate.getMonth()
+    ) {
       let firstDay = new Date(date.year, month, 1);
-      setDate({ 
+      setDate({
         ...date,
         startDate: firstDay,
         endDate: lastDay,
-        selectAll: false
+        selectAll: false,
       });
     } else {
-      setDate({ 
+      setDate({
         ...date,
         endDate: lastDay,
-        selectAll: false
+        selectAll: false,
       });
     }
   };
 
-  const calendarMode= (mode) => {
+  const calendarMode = (mode) => {
     switch (mode) {
       case "Yearly":
         return (
@@ -217,7 +163,8 @@ function WindowList (props) {
             setDates={setStateDateFromQuarter}
           />
         );
-      default://case "Monthly":
+      default:
+        //case "Monthly":
         return (
           <CalendarMonthly
             selectAll={date.selectAll}
@@ -231,38 +178,43 @@ function WindowList (props) {
     }
   };
 
-    return (
-      <div className={styles.Window}>
-        <DateRangePicker
-          setPeriod={setPeriod}
-          selectAll={date.selectAll}
-          setSelectAll={setStateSelectAll}
-          selectAllenabled={period !== "Yearly"}
+  return (
+    <div className={styles.Window}>
+      <DateRangePicker
+        setPeriod={setPeriod}
+        selectAll={date.selectAll}
+        setSelectAll={setStateSelectAll}
+        selectAllenabled={period !== "Yearly"}
+        dateStart={date.startDate}
+        dateEnd={date.endDate}
+        setFavFilter={setFavFilter}
+        showFav={!!session}
+      >
+        {calendarMode(period)}
+      </DateRangePicker>
+
+      {(statusE === "loading" 
+      || statusF === "loading") 
+      && console.log("loading")}
+
+      {(statusE === "error" 
+      || statusF === "error") 
+      && console.log("error")}
+
+      {statusE === "success" 
+      && statusF === "success" 
+      && (
+        <EventList
+          eventList={eventListWithFav()}
+          favList={dataF}
           dateStart={date.startDate}
           dateEnd={date.endDate}
-        >
-          {calendarMode(period)}
-        </DateRangePicker>
-
-        {(statusE === 'loading' || statusF=== 'loading') && (
-         console.log("loading")
-        )}
-        
-        {(statusE === 'error' || statusF=== 'error') && (
-          console.log("error")
-        )}
-        {statusE === 'success' && statusF=== 'success' && (
-          <EventList
-            eventList={eventListWithFav()}
-            favList={dataF}
-            dateStart={date.startDate}
-            dateEnd={date.endDate}
-            refetchFav={refetchFav}
-          />
-        )}
-      </div>
-    );
-  
+          refetchFav={refetchFav}
+          favFilter={favFilter}
+        />
+      )}
+    </div>
+  );
 }
 
 export default WindowList;

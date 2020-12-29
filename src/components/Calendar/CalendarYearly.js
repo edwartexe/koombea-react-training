@@ -6,7 +6,7 @@ const YearElement = (props) => (
     className={cx(styles.year, {
       [styles.selected]: props.selectedYear === props.myYear || props.selectAll,
     })}
-    onClick={()=>props.action(props.myYear)}
+    onClick={() => props.action(props.myYear)}
   >
     {props.myYear}
   </li>
@@ -17,7 +17,7 @@ const yearsArray = (start, ammount, onClick, year, selectAll) => {
     .fill()
     .map((_, index) => {
       return (
-        <YearElement 
+        <YearElement
           key={index}
           i={index}
           selectedYear={year}

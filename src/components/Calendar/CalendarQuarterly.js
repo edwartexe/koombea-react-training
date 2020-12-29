@@ -11,19 +11,13 @@ const QuarterElement = (props) => (
   >
     <div className={styles.quarterNo}> Q{props.i + 1} </div>
     <div className={styles.month}>
-      <p className={styles.monthText}>
-        {monthName[3 * props.i]} 
-      </p>
+      <p className={styles.monthText}>{monthName[3 * props.i]}</p>
     </div>
     <div className={styles.month}>
-      <p className={styles.monthText}>
-        {monthName[3 * props.i + 1]} 
-      </p>
+      <p className={styles.monthText}>{monthName[3 * props.i + 1]}</p>
     </div>
     <div className={styles.month}>
-      <p className={styles.monthText}>
-        {monthName[3 * props.i + 2]} 
-      </p>
+      <p className={styles.monthText}>{monthName[3 * props.i + 2]}</p>
     </div>
   </div>
 );
@@ -33,12 +27,12 @@ const quartArray = (onClick, month1, month2) => {
     .fill()
     .map((_, index) => {
       return (
-        <QuarterElement 
-        key={index + 1}
-        i={index}
-        m1={month1}
-        m2={month2}
-        action={onClick}
+        <QuarterElement
+          key={index + 1}
+          i={index}
+          m1={month1}
+          m2={month2}
+          action={onClick}
         />
       );
     });

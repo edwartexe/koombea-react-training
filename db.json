@@ -6,7 +6,7 @@
       "location": "Online Event",
       "hostname": "Koombea",
       "type": "Private",
-      "date": "2020-11-1",
+      "date": "2020-11-2",
       "tags": "meeting",
       "description": "team introduction"
     },
@@ -35,7 +35,7 @@
       "location": "round the world",
       "hostname": "You",
       "type": "Public",
-      "date": "2020-12-24T05:00:00.000Z",
+      "date": "2020-12-25T05:00:00.000Z",
       "tags": "xmas christmas",
       "description": "Celebrate the arrival of sandy claws",
       "id": 4
@@ -69,6 +69,16 @@
       "tags": "tt",
       "description": "tt",
       "id": 7
+    },
+    {
+      "name": "John Wick",
+      "location": "cine",
+      "hostname": "Keanu Memes",
+      "type": "Public",
+      "date": "2021-02-27T05:00:00.000Z",
+      "tags": "keanu film",
+      "description": "angry keanu part 3",
+      "id": 8
     }
   ],
   "users": [
@@ -131,6 +141,11 @@
       "user_id": 1,
       "event_id": 3,
       "id": 2
+    },
+    {
+      "user_id": 1,
+      "event_id": 5,
+      "id": 3
     }
   ]
 }

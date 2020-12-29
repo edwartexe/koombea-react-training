@@ -77,8 +77,8 @@
 .year:hover,
 .month:hover,
 .quarter:hover .month {
-  color:blue;
-  background: cyan;
+  color:#d1410c;
+  background: #eda58a;
 }
 
 .year.selected,
@@ -87,13 +87,13 @@
 .quarter:hover .quarterNo,
 .quarter.selected .month {
   color:white;
-  background: blue;
+  background: #d1410c;
 }
 
 .quarterNo {
-  background: cyan;
+  background: #eda58a;
   padding:5px;
-  border-right:1px solid cyan;
+  border-right:1px solid #eda58a;
 }
 
 

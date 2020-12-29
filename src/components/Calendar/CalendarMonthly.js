@@ -9,22 +9,20 @@ const MonthElement = (props) => (
     })}
     onClick={() => props.action(props.i)}
   >
-    <p className={styles.monthText}>
-      {props.name}
-    </p>
+    <p className={styles.monthText}>{props.name}</p>
   </div>
 );
 
 const monthArray = (onClick, month1, month2) => {
   return monthName.map((name, index) => {
     return (
-      <MonthElement 
-      key={index}
-      i={index}
-      name={name}
-      m1={month1}
-      m2={month2}
-      action={onClick}
+      <MonthElement
+        key={index}
+        i={index}
+        name={name}
+        m1={month1}
+        m2={month2}
+        action={onClick}
       />
     );
   });
