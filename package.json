@@ -1,7 +1,6 @@
 {
   "name": "koombea-js",
   "version": "0.1.0",
-  "homepage": "http://https://edwartexe.github.io/koombea-react-training/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.0.4",
